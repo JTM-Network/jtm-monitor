@@ -1,12 +1,12 @@
-package com.jtmnetwork.monitor.bungee
+package com.jtmnetwork.monitor.velocity
 
 import com.jtm.framework.Framework
 import com.jtmnetwork.main.JTMMonitor
 import com.jtmnetwork.main.core.domain.constants.ServerType
 
-class BungeeMonitor: Framework(false) {
+class VelocityMonitor: Framework(false) {
 
-    private val type = ServerType.BUNGEE
+    private val type = ServerType.VELOCITY
 
     override fun setup() {
         JTMMonitor.setup(type)

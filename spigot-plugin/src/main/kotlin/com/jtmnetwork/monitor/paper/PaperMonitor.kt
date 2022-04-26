@@ -6,13 +6,21 @@ import com.jtmnetwork.main.core.domain.constants.ServerType
 
 class PaperMonitor: Framework(false) {
 
-    override fun setup() {}
+    private val type = ServerType.PAPER
 
-    override fun init() {}
-
-    override fun enable() {
-        JTMMonitor.startup(ServerType.PAPER)
+    override fun setup() {
+        JTMMonitor.setup(type)
     }
 
-    override fun disable() {}
+    override fun init() {
+        JTMMonitor.init(type)
+    }
+
+    override fun enable() {
+        JTMMonitor.enable(type)
+    }
+
+    override fun disable() {
+        JTMMonitor.disable(type)
+    }
 }
