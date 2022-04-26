@@ -1,0 +1,11 @@
+server:
+  port: 8787
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: monitor-service
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: FALSE

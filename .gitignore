@@ -33,3 +33,6 @@ velocity-plugin/.gradle
 velocity-plugin/build
 .idea
 
+service/.gradle
+service/build
+
