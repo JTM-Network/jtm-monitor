@@ -1,6 +1,5 @@
 package com.jtmnetwork.monitor.service.configuration
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.TestConfiguration
 import redis.embedded.RedisServer
 import javax.annotation.PostConstruct

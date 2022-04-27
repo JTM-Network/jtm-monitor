@@ -8,13 +8,12 @@ import org.springframework.web.reactive.socket.WebSocketSession
 import reactor.core.publisher.Mono
 
 @Component
-class MonitorSocketHandler @Autowired constructor(val eventDispatcher: EventDispatcher): WebSocketHandler {
+class MonitorSocketHandler @Autowired constructor(private val eventDispatcher: EventDispatcher): WebSocketHandler {
     override fun handle(session: WebSocketSession): Mono<Void> {
         return session.send(session.receive()
             .flatMap { msg -> eventDispatcher.dispatch(session, msg.payloadAsText) }
             .doFinally {
                 session.close()
-
             }
         )
     }

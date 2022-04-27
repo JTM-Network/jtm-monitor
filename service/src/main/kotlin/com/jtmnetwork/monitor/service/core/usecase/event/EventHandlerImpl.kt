@@ -15,7 +15,7 @@ abstract class EventHandlerImpl: EventHandler {
     }
 
     private fun message(session: WebSocketSession, name: String, value: Any): Mono<WebSocketMessage> {
-        val event = Event(name, value)
+        val event = Event(name, gson.toJson(value))
         return Mono.just(session.textMessage(gson.toJson(event)))
     }
 }
