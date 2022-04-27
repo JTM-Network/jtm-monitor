@@ -2,10 +2,11 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'org.springframework.boot' version '2.4.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.palantir.docker' version '0.28.0'
 }
 
 group 'com.jtmnetwork.monitor.service'
-version '1.0-SNAPSHOT'
+version '0.12'
 
 repositories {
     mavenCentral()
@@ -13,6 +14,10 @@ repositories {
 
 ext {
     set('springCloudVersion', "2020.0.0")
+}
+
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
 }
 
 dependencyManagement {
@@ -38,10 +43,19 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+    testImplementation 'it.ozimov:embedded-redis:0.7.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.mockito:mockito-inline:2.8.47'
     testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+}
+
+docker {
+    name "drennydev/monitor-service:${project.version}"
+    tags "latest"
+    tag 'DockerHub', "drennydev/monitor-service:${project.version}"
+    files tasks.bootJar.outputs, "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
 }
