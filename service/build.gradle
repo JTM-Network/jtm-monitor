@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.jtmnetwork.monitor.service'
-version '0.13'
+version '0.173'
 
 repositories {
     mavenCentral()

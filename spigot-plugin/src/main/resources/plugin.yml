@@ -1,4 +1,5 @@
 name: JTMMonitor
 author: JTM Network
-main: com.jtmnetwork.monitor.JTMMonitor
+main: com.jtmnetwork.monitor.paper.PaperMonitor
 version: 0.1
+api-version: 1.13

@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.jtmnetwork.main'
-version '0.11'
+version '0.15'
 
 repositories {
     maven {
@@ -48,6 +48,8 @@ dependencies {
     implementation "com.jtm.framework:framework:0.9.11"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.12.5"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5"
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "javax.annotation:javax.annotation-api:1.3.2"
 
     compileClasspath 'me.clip:placeholderapi:2.10.9'
 
