@@ -46,6 +46,7 @@ class ServerServiceIntegrationTest {
     @Test
     fun update() {
         serverService.insert(server)
+
         val updated = serverService.update(server)
 
         StepVerifier.create(updated)

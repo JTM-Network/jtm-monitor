@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.jtmnetwork.monitor.service'
-version '0.12'
+version '0.13'
 
 repositories {
     mavenCentral()
@@ -16,8 +16,11 @@ ext {
     set('springCloudVersion', "2020.0.0")
 }
 
-configurations {
-    all*.exclude module : 'spring-boot-starter-logging'
+test {
+    configurations {
+        all*.exclude module : 'logback-classic'
+        all*.exclude module : 'spring-boot-starter-logging'
+    }
 }
 
 dependencyManagement {
@@ -26,6 +29,9 @@ dependencyManagement {
     }
 }
 
+sourceCompatibility = 16
+targetCompatibility = 16
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.springframework.boot:spring-boot-starter"
@@ -33,6 +39,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3'

@@ -1,7 +1,6 @@
 package com.jtmnetwork.monitor.service.entrypoint.configuration
 
 import com.jtmnetwork.monitor.service.core.domain.entity.CachedServer
-import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory
