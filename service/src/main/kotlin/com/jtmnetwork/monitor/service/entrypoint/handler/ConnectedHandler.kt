@@ -1,4 +1,4 @@
-package com.jtmnetwork.monitor.service.core.usecase.event.impl
+package com.jtmnetwork.monitor.service.entrypoint.handler
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import com.jtmnetwork.monitor.service.core.domain.model.ServerInfo

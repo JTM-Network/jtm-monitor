@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.data.repository
 
 import com.jtmnetwork.monitor.service.core.usecase.event.EventHandler
-import com.jtmnetwork.monitor.service.core.usecase.event.impl.ConnectedHandler
+import com.jtmnetwork.monitor.service.entrypoint.handler.ConnectedHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Component
