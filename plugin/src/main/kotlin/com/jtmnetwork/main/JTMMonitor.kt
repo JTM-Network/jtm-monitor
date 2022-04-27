@@ -1,47 +1,38 @@
 package com.jtmnetwork.main
 
-import com.jtmnetwork.main.core.domain.constants.ServerType
+import com.google.inject.Guice
+import com.google.inject.Injector
+import com.jtm.framework.Framework
+import com.jtmnetwork.main.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.main.entrypoint.module.MonitorModule
+import com.jtmnetwork.main.entrypoint.socket.MonitorConnection
 
 class JTMMonitor {
     companion object {
-        fun setup(type: ServerType) {
-            when(type) {
-                ServerType.PAPER -> {}
+        private lateinit var injector: Injector
 
-                ServerType.BUNGEE -> {}
+        fun setup() {
 
-                ServerType.VELOCITY -> {}
-            }
         }
 
-        fun init(type: ServerType) {
-            when(type) {
-                ServerType.PAPER -> {}
-
-                ServerType.BUNGEE -> {}
-
-                ServerType.VELOCITY -> {}
-            }
+        fun setup(framework: Framework) {
+            injector = Guice.createInjector(MonitorModule(framework))
         }
 
-        fun enable(type: ServerType) {
-            when(type) {
-                ServerType.PAPER -> {}
-
-                ServerType.BUNGEE -> {}
-
-                ServerType.VELOCITY -> {}
-            }
+        fun init() {
+            injector.getInstance(ConnectedHandler::class.java).init()
         }
 
-        fun disable(type: ServerType) {
-            when(type) {
-                ServerType.PAPER -> {}
+        fun enable() {
+            getMonitorConnection().connect()
+        }
 
-                ServerType.BUNGEE -> {}
+        fun disable() {
+            getMonitorConnection().disconnect()
+        }
 
-                ServerType.VELOCITY -> {}
-            }
+        private fun getMonitorConnection(): MonitorConnection {
+            return injector.getInstance(MonitorConnection::class.java)
         }
     }
 }
