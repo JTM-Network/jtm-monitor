@@ -2,10 +2,9 @@ package com.jtmnetwork.main.core.usecase.handler
 
 import com.google.gson.GsonBuilder
 import com.jtmnetwork.main.core.domain.model.Event
-import com.jtmnetwork.main.data.repository.EventRepository
 import okhttp3.WebSocket
 
-abstract class EventHandlerImpl constructor(private val event: String, private val eventRepository: EventRepository): EventHandler {
+abstract class EventHandlerImpl: EventHandler {
 
     private val gson = GsonBuilder().serializeNulls().create()
 

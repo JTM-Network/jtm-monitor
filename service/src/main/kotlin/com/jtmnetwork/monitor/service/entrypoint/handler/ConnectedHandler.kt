@@ -31,9 +31,6 @@ class ConnectedHandler @Autowired constructor(private val serverService: ServerS
                 }
         else
             serverService.findById(UUID.fromString(info.id))
-                .flatMap {
-                    info.id = it.id.toString()
-                    sendEvent(session, "connected_event", info)
-                }
+                .flatMap { sendEvent(session, "connected_event", info) }
     }
 }
