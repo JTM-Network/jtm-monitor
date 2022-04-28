@@ -30,4 +30,5 @@ jobs:
         distribution: 'temurin'
     - name: Build with gradle
       run: |-
+        cd plugin
         ./gradlew build
