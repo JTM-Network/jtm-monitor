@@ -30,8 +30,8 @@ jobs:
         GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
       shell: bash
       run: |
-        echo "GRADLE_USER_HOME=${HOME}/plugin" >> $GITHUB_ENV
-        echo "${GRADLE_PROPERTIES}" > ~/plugin/gradle.properties
+        cd plugin
+        echo "${GRADLE_PROPERTIES}" > gradle.properties
     - name: Build with gradle
       run: |-
         cd plugin
