@@ -13,9 +13,6 @@ on:
   pull_request:
     branches: [ 5-real-time-communication ]
 
-permissions:
-  contents: read
-
 jobs:
   build:
 
