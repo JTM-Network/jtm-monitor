@@ -15,7 +15,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +35,7 @@ jobs:
       run: |-
         cd plugin
         ./gradlew build
+    - name: Publish with gradle
+      run: |-
+        cd plugin
+        ./gradlew publish
