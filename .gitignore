@@ -23,16 +23,20 @@
 hs_err_pid*
 
 gradle.properties
-plugin/.gradle
-plugin/build
-spigot-plugin/.gradle
-spigot-plugin/build
-bungee-plugin/.gradle
-bungee-plugin/build
-velocity-plugin/.gradle
-velocity-plugin/build
 .idea
 
-service/.gradle
-service/build
+monitor-main/.gradle
+monitor-main/build
+
+monitor-spigot/.gradle
+monitor-spigot/build
+
+monitor-bungee/.gradle
+monitor-bungee/build
+
+monitor-velocity/.gradle
+monitor-velocity/build
+
+monitor-service/.gradle
+monitor-service/build
 
