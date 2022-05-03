@@ -33,9 +33,9 @@ jobs:
         echo "${GRADLE_PROPERTIES}" > gradle.properties
     - name: Build with gradle
       run: |-
-        cd plugin
+        cd monitor-main
         ./gradlew build
     - name: Publish with gradle
       run: |-
-        cd plugin
+        cd monitor-main
         ./gradlew publish
