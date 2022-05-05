@@ -13,7 +13,6 @@ import okhttp3.WebSocket
 import org.slf4j.LoggerFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.concurrent.ThreadPoolExecutor
 
 @Singleton
 class MonitorConnection @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
