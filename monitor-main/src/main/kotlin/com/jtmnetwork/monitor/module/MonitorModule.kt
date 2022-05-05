@@ -13,7 +13,6 @@ import com.jtmnetwork.monitor.entrypoint.socket.MonitorListener
 class MonitorModule(private val framework: Framework): AbstractModule() {
     override fun configure() {
         bind(Framework::class.java).toInstance(framework)
-        bind(MonitorListener::class.java)
         bind(MonitorConnection::class.java)
 
         bind(ServerConfiguration::class.java)
