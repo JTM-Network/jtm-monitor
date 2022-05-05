@@ -6,10 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger
 
 data class RetrySocketConnection(private val connection: MonitorConnection, private val maxAttempts: Int = 10, private val delay: Long = 5000, private val attempts: AtomicInteger = AtomicInteger(), private val errors: MutableList<Throwable> = ArrayList()) {
 
-    fun perform(): WebSocket? {
-        do {
-            if (!connection.isConnected()) connection.connect()
-        } while (true)
+    fun perform() {
+        if (!connection.isConnected()) connection.connect()
     }
 
     fun addError(throwable: Throwable) {
