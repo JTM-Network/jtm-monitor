@@ -6,16 +6,14 @@ import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.data.repository.EventRepository
 import com.jtmnetwork.monitor.entrypoint.event.EventRegistry
 import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
-import com.jtmnetwork.monitor.entrypoint.module.EventModule
-import com.jtmnetwork.monitor.entrypoint.module.MonitorModule
+import com.jtmnetwork.monitor.module.EventModule
+import com.jtmnetwork.monitor.module.MonitorModule
 import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 
 class JTMMonitor {
     companion object {
         private lateinit var injector: Injector
         private lateinit var registry: EventRegistry
-
-        fun setup() {}
 
         fun setup(framework: Framework) {
             injector = Guice.createInjector(MonitorModule(framework), EventModule())

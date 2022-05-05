@@ -1,8 +1,7 @@
 package com.jtmnetwork.monitor.paper
 
 import com.jtm.framework.Framework
-import com.jtmnetwork.main.JTMMonitor
-import com.jtmnetwork.main.core.domain.constants.ServerType
+import com.jtmnetwork.monitor.JTMMonitor
 
 class PaperMonitor: Framework(false) {
 

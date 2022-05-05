@@ -1,11 +1,11 @@
 package com.jtmnetwork.monitor.service.data.repository
 
 import com.jtmnetwork.monitor.service.core.domain.model.Session
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.web.reactive.socket.WebSocketSession
 
-@Repository
-open class SessionRepository {
+@Component
+class SessionRepository {
 
     private val sessions: MutableMap<String, Session> = HashMap()
 

@@ -1,4 +1,4 @@
-package com.jtmnetwork.monitor.entrypoint.module
+package com.jtmnetwork.monitor.module
 
 import com.google.inject.AbstractModule
 import com.jtmnetwork.monitor.data.repository.EventRepository

@@ -11,11 +11,13 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
 import org.slf4j.LoggerFactory
+import java.lang.Exception
 
 @Singleton
-class MonitorListener @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher): WebSocketListener() {
+class MonitorListener @Inject constructor(framework: Framework, private val connection: MonitorConnection, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher): WebSocketListener() {
 
     private val logger = LoggerFactory.getLogger(MonitorListener::class.java)
+    private val server = framework.server
 
     override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
         logger.info("Closed connection.")
@@ -27,12 +29,12 @@ class MonitorListener @Inject constructor(private val framework: Framework, priv
 
     override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
         super.onFailure(webSocket, t, response)
-        logger.info("Connection failed: ${t.message}")
-        t.printStackTrace()
+        connection.retry.addError(t)
+        if (connection.retry.reachedMaxAttempts()) throw Exception(t)
+        connection.retryThread.setSleep()
     }
 
     override fun onMessage(webSocket: WebSocket, text: String) {
-        logger.info("Received message.")
         dispatcher.dispatch(webSocket, text)
     }
 
@@ -41,7 +43,8 @@ class MonitorListener @Inject constructor(private val framework: Framework, priv
     }
 
     override fun onOpen(webSocket: WebSocket, response: Response) {
-        dispatcher.sendEvent(webSocket, "connected_event", ServerInfo(configuration, framework.server))
-        logger.info("Opened connection.")
+        dispatcher.sendEvent(webSocket, "connected_event", ServerInfo(configuration, server))
+        connection.setConnected(true)
+        connection.executor.submit(connection.retryThread)
     }
 }
