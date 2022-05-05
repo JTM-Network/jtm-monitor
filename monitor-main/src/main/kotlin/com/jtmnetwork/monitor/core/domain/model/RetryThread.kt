@@ -4,7 +4,7 @@ import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 
 class RetryThread(private val connection: MonitorConnection): Thread() {
 
-    private var sleepStartTime: Long = 0
+    private var sleepEndTime: Long = 0
 
     override fun run() {
         if (isSleeping()) return
@@ -13,10 +13,10 @@ class RetryThread(private val connection: MonitorConnection): Thread() {
     }
 
     fun setSleep() {
-        this.sleepStartTime = System.currentTimeMillis()
+        this.sleepEndTime = (System.currentTimeMillis() + connection.retry.getDelay())
     }
 
     fun isSleeping(): Boolean {
-        return (this.sleepStartTime + (connection.retry.getDelay()) < System.currentTimeMillis())
+        return this.sleepEndTime > System.currentTimeMillis()
     }
 }
