@@ -1,4 +1,4 @@
-package com.jtmnetwork.main.core.domain.constants
+package com.jtmnetwork.monitor.core.domain.constants
 
 enum class ServerType {
     PAPER, BUNGEE, VELOCITY

@@ -1,8 +1,8 @@
-package com.jtmnetwork.main.entrypoint.event
+package com.jtmnetwork.monitor.entrypoint.event
 
 import com.google.inject.Injector
-import com.jtmnetwork.main.data.repository.EventRepository
-import com.jtmnetwork.main.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.monitor.data.repository.EventRepository
+import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
 
 class EventRegistry(private val repository: EventRepository, private val injector: Injector) {
 

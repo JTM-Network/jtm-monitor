@@ -1,11 +1,11 @@
-package com.jtmnetwork.main.entrypoint.socket
+package com.jtmnetwork.monitor.entrypoint.socket
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.jtm.framework.Framework
-import com.jtmnetwork.main.core.domain.model.ServerInfo
-import com.jtmnetwork.main.entrypoint.configuration.ServerConfiguration
-import com.jtmnetwork.main.entrypoint.event.EventDispatcher
+import com.jtmnetwork.monitor.core.domain.entity.ServerInfo
+import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
+import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener

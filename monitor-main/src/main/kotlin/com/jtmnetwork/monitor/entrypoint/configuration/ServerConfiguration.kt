@@ -1,4 +1,4 @@
-package com.jtmnetwork.main.entrypoint.configuration
+package com.jtmnetwork.monitor.entrypoint.configuration
 
 import com.google.inject.Inject
 import com.jtm.framework.Framework

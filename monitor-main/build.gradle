@@ -4,7 +4,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'com.jtmnetwork.main'
+group 'com.jtmnetwork.monitor'
 version '0.16'
 
 repositories {

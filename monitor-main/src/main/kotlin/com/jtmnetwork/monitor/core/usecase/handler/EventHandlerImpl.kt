@@ -1,7 +1,7 @@
-package com.jtmnetwork.main.core.usecase.handler
+package com.jtmnetwork.monitor.core.usecase.handler
 
 import com.google.gson.GsonBuilder
-import com.jtmnetwork.main.core.domain.model.Event
+import com.jtmnetwork.monitor.core.domain.model.Event
 import okhttp3.WebSocket
 
 abstract class EventHandlerImpl: EventHandler {

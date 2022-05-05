@@ -1,13 +1,14 @@
-package com.jtmnetwork.main
+package com.jtmnetwork.monitor
 
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.jtm.framework.Framework
-import com.jtmnetwork.main.data.repository.EventRepository
-import com.jtmnetwork.main.entrypoint.event.EventRegistry
-import com.jtmnetwork.main.entrypoint.handler.ConnectedHandler
-import com.jtmnetwork.main.entrypoint.module.MonitorModule
-import com.jtmnetwork.main.entrypoint.socket.MonitorConnection
+import com.jtmnetwork.monitor.data.repository.EventRepository
+import com.jtmnetwork.monitor.entrypoint.event.EventRegistry
+import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.monitor.entrypoint.module.EventModule
+import com.jtmnetwork.monitor.entrypoint.module.MonitorModule
+import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 
 class JTMMonitor {
     companion object {
@@ -17,7 +18,7 @@ class JTMMonitor {
         fun setup() {}
 
         fun setup(framework: Framework) {
-            injector = Guice.createInjector(MonitorModule(framework))
+            injector = Guice.createInjector(MonitorModule(framework), EventModule())
             registry = EventRegistry(getEventRepository(), injector)
         }
 

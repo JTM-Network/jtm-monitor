@@ -1,4 +1,4 @@
-package com.jtmnetwork.main.entrypoint.socket
+package com.jtmnetwork.monitor.entrypoint.socket
 
 import com.google.inject.Inject
 import com.google.inject.Singleton

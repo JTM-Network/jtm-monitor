@@ -1,11 +1,11 @@
-package com.jtmnetwork.main.entrypoint.event
+package com.jtmnetwork.monitor.entrypoint.event
 
 import com.google.gson.GsonBuilder
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import com.jtmnetwork.main.core.domain.model.Event
-import com.jtmnetwork.main.data.repository.EventRepository
-import com.jtmnetwork.main.entrypoint.configuration.ServerConfiguration
+import com.jtmnetwork.monitor.core.domain.model.Event
+import com.jtmnetwork.monitor.data.repository.EventRepository
+import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
 import okhttp3.WebSocket
 import org.slf4j.LoggerFactory
 

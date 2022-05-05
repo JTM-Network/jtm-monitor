@@ -1,10 +1,10 @@
-package com.jtmnetwork.main.data.repository
+package com.jtmnetwork.monitor.data.repository
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.jtm.framework.core.usecase.repository.InMemoryRepository
-import com.jtmnetwork.main.core.usecase.handler.EventHandler
-import com.jtmnetwork.main.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.monitor.core.usecase.handler.EventHandler
+import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
 
 @Singleton
 class EventRepository: InMemoryRepository<EventHandler, String>() {

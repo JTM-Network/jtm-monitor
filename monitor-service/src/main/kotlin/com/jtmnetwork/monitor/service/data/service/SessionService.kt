@@ -12,8 +12,8 @@ import reactor.core.publisher.Mono
 class SessionService @Autowired constructor(private val sessionRepository: SessionRepository) {
 
     fun insert(session: WebSocketSession): Mono<Session> {
-        val sesh = sessionRepository.addSession(session) ?: return Mono.empty()
-        return Mono.just(sesh)
+        val ses = sessionRepository.addSession(session) ?: return Mono.empty()
+        return Mono.just(ses)
     }
 
     fun findById(id: String): Mono<Session> {
