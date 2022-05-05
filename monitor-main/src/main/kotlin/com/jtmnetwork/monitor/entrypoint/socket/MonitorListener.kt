@@ -21,17 +21,20 @@ class MonitorListener @Inject constructor(framework: Framework, private val conn
 
     override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
         logger.info("Closed connection.")
+        connection.setTryingConnection(false)
     }
 
     override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
         super.onClosing(webSocket, code, reason)
+        connection.setTryingConnection(false)
     }
 
     override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
         super.onFailure(webSocket, t, response)
         connection.retry.addError(t)
-        if (connection.retry.reachedMaxAttempts()) throw Exception(t)
         connection.retryThread.setSleep()
+        connection.setTryingConnection(false)
+        if (connection.retry.reachedMaxAttempts()) throw Exception(t)
     }
 
     override fun onMessage(webSocket: WebSocket, text: String) {
@@ -45,6 +48,6 @@ class MonitorListener @Inject constructor(framework: Framework, private val conn
     override fun onOpen(webSocket: WebSocket, response: Response) {
         dispatcher.sendEvent(webSocket, "connected_event", ServerInfo(configuration, server))
         connection.setConnected(true)
-        connection.executor.submit(connection.retryThread)
+        connection.setTryingConnection(false)
     }
 }

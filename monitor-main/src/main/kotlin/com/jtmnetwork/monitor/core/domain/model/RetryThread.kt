@@ -8,6 +8,7 @@ class RetryThread(private val connection: MonitorConnection): Thread() {
 
     override fun run() {
         if (isSleeping()) return
+        if (connection.isTryingToConnect()) return
         connection.retry.perform()
     }
 
