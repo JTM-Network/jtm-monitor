@@ -22,6 +22,8 @@ class JTMMonitor {
 
         fun init() {
             registry.init()
+
+            getMonitorConnection().init()
         }
 
         fun enable() {

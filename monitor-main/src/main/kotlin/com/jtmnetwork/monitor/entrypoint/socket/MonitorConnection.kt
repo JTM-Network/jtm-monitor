@@ -22,18 +22,21 @@ class MonitorConnection @Inject constructor(private val framework: Framework, pr
 
     private lateinit var socket: WebSocket
     private var connected = false
-    private var tryingConnection = false
+    private var tryingConnection = true
 
     val retry = RetrySocketConnection(this)
     val retryThread = RetryThread(this)
     val executor: ExecutorService = Executors.newSingleThreadExecutor()
+
+    fun init() {
+        executor.submit(retryThread)
+    }
 
     fun connect() {
         setTryingConnection(true)
         val request = Request.Builder().url("ws://local.jtm-network.com:8787/monitor").build()
         socket = client.newWebSocket(request, MonitorListener(framework, this, configuration, dispatcher))
         logger.info("Trying to connect to the server.")
-        executor.submit(retryThread)
     }
 
     fun disconnect() {
