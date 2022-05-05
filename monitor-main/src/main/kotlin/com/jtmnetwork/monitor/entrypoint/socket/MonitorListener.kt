@@ -34,6 +34,7 @@ class MonitorListener @Inject constructor(framework: Framework, private val conn
         connection.retry.addError(t)
         connection.retryThread.setSleep()
         connection.setTryingConnection(false)
+        logger.info("Retrying connection in 5 seconds.")
         if (connection.retry.reachedMaxAttempts()) throw Exception(t)
     }
 
