@@ -10,11 +10,11 @@ class RetryThread(private val connection: MonitorConnection): Thread() {
 
     override fun run() {
         do {
-            logger.info("Sleep check.")
-            if (isSleeping()) return
-            logger.info("Connect check...")
-            if (connection.isTryingToConnect()) return
-            logger.info("Perform task.")
+//            logger.info("Sleep check.")
+//            if (isSleeping()) return
+//            logger.info("Connect check...")
+//            if (connection.isTryingToConnect()) return
+//            logger.info("Perform task.")
             connection.retry.perform()
         } while (true)
     }

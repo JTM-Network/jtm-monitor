@@ -42,6 +42,7 @@ class MonitorConnection @Inject constructor(private val framework: Framework, pr
     fun disconnect() {
         socket.close(1001, "Stopped connection.")
         logger.info("Connection has been closed.")
+        executor.shutdownNow()
     }
 
     fun isConnected(): Boolean {
