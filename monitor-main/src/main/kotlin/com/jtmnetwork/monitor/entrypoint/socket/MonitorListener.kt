@@ -1,7 +1,5 @@
 package com.jtmnetwork.monitor.entrypoint.socket
 
-import com.google.inject.Inject
-import com.google.inject.Singleton
 import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.core.domain.entity.ServerInfo
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
@@ -11,10 +9,8 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
 import org.slf4j.LoggerFactory
-import java.lang.Exception
 
-@Singleton
-class MonitorListener @Inject constructor(framework: Framework, private val connection: MonitorConnection, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher): WebSocketListener() {
+class MonitorListener(framework: Framework, private val connection: MonitorConnection, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher): WebSocketListener() {
 
     private val logger = LoggerFactory.getLogger(MonitorListener::class.java)
     private val server = framework.server

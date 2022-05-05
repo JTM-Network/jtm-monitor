@@ -2,8 +2,11 @@ package com.jtmnetwork.monitor.entrypoint.socket
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.core.domain.model.RetrySocketConnection
 import com.jtmnetwork.monitor.core.domain.model.RetryThread
+import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
+import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -13,7 +16,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ThreadPoolExecutor
 
 @Singleton
-class MonitorConnection @Inject constructor(private val monitorListener: MonitorListener) {
+class MonitorConnection @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
 
     private val logger = LoggerFactory.getLogger(MonitorConnection::class.java)
     private val client = OkHttpClient.Builder().build()
@@ -29,7 +32,7 @@ class MonitorConnection @Inject constructor(private val monitorListener: Monitor
     fun connect() {
         setTryingConnection(true)
         val request = Request.Builder().url("ws://local.jtm-network.com:8787/monitor").build()
-        socket = client.newWebSocket(request, monitorListener)
+        socket = client.newWebSocket(request, MonitorListener(framework, this, configuration, dispatcher))
         logger.info("Trying to connect to the server.")
         executor.submit(retryThread)
     }
