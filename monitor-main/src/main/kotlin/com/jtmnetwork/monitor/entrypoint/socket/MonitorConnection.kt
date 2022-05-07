@@ -3,8 +3,6 @@ package com.jtmnetwork.monitor.entrypoint.socket
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.jtm.framework.Framework
-import com.jtmnetwork.monitor.core.domain.model.RetrySocketConnection
-import com.jtmnetwork.monitor.core.domain.model.RetryThread
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
 import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.OkHttpClient
@@ -21,43 +19,15 @@ class MonitorConnection @Inject constructor(private val framework: Framework, pr
     private val client = OkHttpClient.Builder().build()
 
     private lateinit var socket: WebSocket
-    private var connected = false
-    private var tryingConnection = true
-
-    val retry = RetrySocketConnection(this)
-    val retryThread = RetryThread(this)
-    val executor: ExecutorService = Executors.newSingleThreadExecutor()
-
-    fun init() {
-        executor.submit(retryThread)
-    }
 
     fun connect() {
-        setTryingConnection(true)
         val request = Request.Builder().url("ws://local.jtm-network.com:8787/monitor").build()
-        socket = client.newWebSocket(request, MonitorListener(framework, this, configuration, dispatcher))
+        socket = client.newWebSocket(request, MonitorListener(framework, configuration, dispatcher))
         logger.info("Trying to connect to the server.")
     }
 
     fun disconnect() {
         socket.close(1001, "Stopped connection.")
         logger.info("Connection has been closed.")
-        executor.shutdownNow()
-    }
-
-    fun isConnected(): Boolean {
-        return connected
-    }
-
-    fun setConnected(connected: Boolean) {
-        this.connected = connected
-    }
-
-    fun isTryingToConnect(): Boolean {
-        return this.tryingConnection
-    }
-
-    fun setTryingConnection(tryingConnection: Boolean) {
-        this.tryingConnection = tryingConnection
     }
 }
