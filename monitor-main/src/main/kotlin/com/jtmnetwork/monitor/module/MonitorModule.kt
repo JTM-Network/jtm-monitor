@@ -2,13 +2,11 @@ package com.jtmnetwork.monitor.module
 
 import com.google.inject.AbstractModule
 import com.jtm.framework.Framework
-import com.jtmnetwork.monitor.data.repository.EventRepository
+import com.jtmnetwork.monitor.core.usecase.log.LogReporter
 import com.jtmnetwork.monitor.data.service.ServerInfoService
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
-import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
-import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.monitor.entrypoint.log.LogHandler
 import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
-import com.jtmnetwork.monitor.entrypoint.socket.MonitorListener
 
 class MonitorModule(private val framework: Framework): AbstractModule() {
     override fun configure() {
@@ -18,5 +16,7 @@ class MonitorModule(private val framework: Framework): AbstractModule() {
         bind(ServerConfiguration::class.java)
 
         bind(ServerInfoService::class.java)
+        bind(LogHandler::class.java)
+        bind(LogReporter::class.java)
     }
 }

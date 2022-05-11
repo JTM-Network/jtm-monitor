@@ -1,22 +1,23 @@
 package com.jtmnetwork.monitor.entrypoint.socket
 
+import com.google.gson.GsonBuilder
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.jtm.framework.Framework
+import com.jtmnetwork.monitor.core.domain.model.Event
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
 import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
 import org.slf4j.LoggerFactory
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 @Singleton
 class MonitorConnection @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
 
     private val logger = LoggerFactory.getLogger(MonitorConnection::class.java)
     private val client = OkHttpClient.Builder().build()
+    private val gson = GsonBuilder().setPrettyPrinting().create()
 
     private lateinit var socket: WebSocket
 
@@ -29,5 +30,11 @@ class MonitorConnection @Inject constructor(private val framework: Framework, pr
     fun disconnect() {
         socket.close(1001, "Stopped connection.")
         logger.info("Connection has been closed.")
+    }
+
+    fun sendEvent(name: String, value: Any) {
+        val event = Event(name, gson.toJson(value))
+        val json = gson.toJson(event)
+        socket.send(json)
     }
 }

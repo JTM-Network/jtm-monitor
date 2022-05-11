@@ -66,6 +66,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
      */
     fun deleteById(id: UUID): Mono<Server> {
         return repository.findById(id)
+            .switchIfEmpty(Mono.defer { Mono.error(ServerNotFound()) })
             .flatMap { repository.delete(it).thenReturn(it) }
     }
 }

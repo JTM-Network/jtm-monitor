@@ -5,10 +5,9 @@ import com.google.inject.Injector
 import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.data.repository.EventRepository
 import com.jtmnetwork.monitor.entrypoint.event.EventRegistry
-import com.jtmnetwork.monitor.entrypoint.handler.ConnectedHandler
+import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 import com.jtmnetwork.monitor.module.EventModule
 import com.jtmnetwork.monitor.module.MonitorModule
-import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 
 class JTMMonitor {
     companion object {
@@ -23,7 +22,6 @@ class JTMMonitor {
         fun init() {
             registry.init()
 
-            getMonitorConnection().init()
         }
 
         fun enable() {
