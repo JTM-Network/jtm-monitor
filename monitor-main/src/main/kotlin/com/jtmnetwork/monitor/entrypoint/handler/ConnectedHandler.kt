@@ -32,5 +32,6 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
         logger.info("Successfully connected to the server.")
         val logs = logReporter.getLogs()
         connection.sendEvent("incoming_log_event", ServerLog(logs))
+        logReporter.init()
     }
 }
