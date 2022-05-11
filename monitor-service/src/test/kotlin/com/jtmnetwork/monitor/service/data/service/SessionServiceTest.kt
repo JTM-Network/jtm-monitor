@@ -1,6 +1,7 @@
 package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.model.Session
+import com.jtmnetwork.monitor.service.data.repository.LogRepository
 import com.jtmnetwork.monitor.service.data.repository.SessionRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -19,7 +20,8 @@ import reactor.test.StepVerifier
 class SessionServiceTest {
 
     private val sessionRepository: SessionRepository = mock()
-    private val sessionService = SessionService(sessionRepository)
+    private val logRepository: LogRepository = mock()
+    private val sessionService = SessionService(sessionRepository, logRepository)
     private val session: Session = mock()
     private val socketSession: WebSocketSession = mock()
 

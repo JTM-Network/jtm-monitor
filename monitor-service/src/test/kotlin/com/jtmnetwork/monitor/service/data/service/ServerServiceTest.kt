@@ -1,6 +1,7 @@
 package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
+import com.jtmnetwork.monitor.service.core.domain.exception.ServerNotFound
 import com.jtmnetwork.monitor.service.core.usecase.server.ServerRepository
 import com.jtmnetwork.monitor.service.data.cache.ServerCache
 import org.assertj.core.api.Assertions.assertThat
@@ -65,6 +66,20 @@ class ServerServiceTest {
     }
 
     @Test
+    fun findById_thenNotFound() {
+        `when`(repository.findById(any(UUID::class.java))).thenReturn(Mono.empty())
+
+        val returned = serverService.findById(UUID.randomUUID())
+
+        verify(repository, times(1)).findById(any(UUID::class.java))
+        verifyNoMoreInteractions(repository)
+
+        StepVerifier.create(returned)
+            .expectError(ServerNotFound::class.java)
+            .verify()
+    }
+
+    @Test
     fun findById() {
         `when`(repository.findById(any(UUID::class.java))).thenReturn(Mono.just(server))
 
@@ -97,6 +112,20 @@ class ServerServiceTest {
     }
 
     @Test
+    fun deleteById_thenNotFound() {
+        `when`(repository.findById(any(UUID::class.java))).thenReturn(Mono.empty())
+
+        val returned = serverService.deleteById(UUID.randomUUID())
+
+        verify(repository, times(1)).findById(any(UUID::class.java))
+        verifyNoMoreInteractions(repository)
+
+        StepVerifier.create(returned)
+            .expectError(ServerNotFound::class.java)
+            .verify()
+    }
+
+    @Test
     fun deleteById() {
         `when`(repository.findById(any(UUID::class.java))).thenReturn(Mono.just(server))
         `when`(repository.delete(anyOrNull())).thenReturn(Mono.empty())
@@ -112,5 +141,4 @@ class ServerServiceTest {
             }
             .verifyComplete()
     }
-
 }
