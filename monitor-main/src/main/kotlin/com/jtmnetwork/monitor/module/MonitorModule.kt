@@ -5,7 +5,7 @@ import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.core.usecase.log.LogReporter
 import com.jtmnetwork.monitor.data.service.ServerInfoService
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
-import com.jtmnetwork.monitor.entrypoint.log.LogHandler
+import com.jtmnetwork.monitor.entrypoint.log.LogAppender
 import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
 
 class MonitorModule(private val framework: Framework): AbstractModule() {
@@ -16,7 +16,7 @@ class MonitorModule(private val framework: Framework): AbstractModule() {
         bind(ServerConfiguration::class.java)
 
         bind(ServerInfoService::class.java)
-        bind(LogHandler::class.java)
+        bind(LogAppender::class.java)
         bind(LogReporter::class.java)
     }
 }
