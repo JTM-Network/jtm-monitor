@@ -1,5 +1,6 @@
 package com.jtmnetwork.monitor.service
 
+import com.jtmnetwork.monitor.service.core.usecase.file.PluginFileHandlerTest
 import com.jtmnetwork.monitor.service.data.service.LogServiceTest
 import com.jtmnetwork.monitor.service.data.service.PluginServiceTest
 import com.jtmnetwork.monitor.service.data.service.ServerServiceTest
@@ -15,6 +16,8 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(value = [
+    PluginFileHandlerTest::class,
+
     LogServiceTest::class,
     ServerServiceTest::class,
     SessionServiceTest::class,

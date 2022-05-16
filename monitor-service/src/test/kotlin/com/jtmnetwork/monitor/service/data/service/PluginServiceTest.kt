@@ -1,8 +1,8 @@
 package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Plugin
-import com.jtmnetwork.monitor.service.core.domain.exception.PluginFound
-import com.jtmnetwork.monitor.service.core.domain.exception.PluginNotFound
+import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginFound
+import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginNotFound
 import com.jtmnetwork.monitor.service.data.repository.PluginRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

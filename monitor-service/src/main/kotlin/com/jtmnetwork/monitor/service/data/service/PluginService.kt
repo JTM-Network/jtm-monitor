@@ -1,8 +1,8 @@
 package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Plugin
-import com.jtmnetwork.monitor.service.core.domain.exception.PluginFound
-import com.jtmnetwork.monitor.service.core.domain.exception.PluginNotFound
+import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginFound
+import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginNotFound
 import com.jtmnetwork.monitor.service.data.repository.PluginRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -65,9 +65,7 @@ class PluginService @Autowired constructor(private val pluginRepository: PluginR
      * @return plugin           the list of plugins
      * @see                     Plugin
      */
-    fun getPlugins(): Flux<Plugin> {
-        return pluginRepository.findAll()
-    }
+    fun getPlugins(): Flux<Plugin> = pluginRepository.findAll()
 
     /**
      * Removes the plugin using the identifier.
