@@ -1,6 +1,7 @@
 package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.exception.ConsoleNotFound
+import com.jtmnetwork.monitor.service.core.domain.model.Console
 import com.jtmnetwork.monitor.service.data.repository.LogRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.codec.ServerSentEvent
@@ -24,7 +25,7 @@ class LogService @Autowired constructor(private val logRepository: LogRepository
     /**
      * Get all console sessions created.
      */
-    fun getConsoles(): Flux<String> {
+    fun getConsoles(): Flux<Console> {
         return logRepository.getSinks()
     }
 }

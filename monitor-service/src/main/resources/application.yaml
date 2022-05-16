@@ -11,3 +11,6 @@ spring:
       FAIL_ON_EMPTY_BEANS: FALSE
   profiles:
     active: ${PROFILE}
+
+discord:
+  api: ${API_KEY}

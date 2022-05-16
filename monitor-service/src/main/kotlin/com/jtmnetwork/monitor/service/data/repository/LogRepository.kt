@@ -1,5 +1,6 @@
 package com.jtmnetwork.monitor.service.data.repository
 
+import com.jtmnetwork.monitor.service.core.domain.model.Console
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
@@ -19,13 +20,14 @@ class LogRepository {
         return this.sinks[id]
     }
 
-    fun getSinks(): Flux<String> {
-        return Flux.fromIterable(this.sinks.keys.toList())
+    fun getSinks(): Flux<Console> {
+        return Flux.fromIterable(this.sinks.keys.toList()).map { Console(it) }
     }
 
     fun sendMessage(id: String, msg: String) {
         val sink = getSink(id) ?: return
         val result = sink.tryEmitNext(msg)
+
         if (result.isFailure) {
             logger.info("Failed to send message")
             result.orThrow()

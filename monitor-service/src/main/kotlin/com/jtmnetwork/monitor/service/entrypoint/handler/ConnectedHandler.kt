@@ -5,6 +5,7 @@ import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import com.jtmnetwork.monitor.service.core.domain.model.ServerInfo
 import com.jtmnetwork.monitor.service.core.domain.model.event.Event
 import com.jtmnetwork.monitor.service.core.usecase.event.EventHandlerImpl
+import com.jtmnetwork.monitor.service.data.service.DiscordService
 import com.jtmnetwork.monitor.service.data.service.ServerService
 import com.jtmnetwork.monitor.service.data.service.SessionService
 import org.slf4j.LoggerFactory
@@ -16,13 +17,14 @@ import reactor.core.publisher.Mono
 import java.util.*
 
 @Component
-class ConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService): EventHandlerImpl() {
+class ConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService, private val discordService: DiscordService): EventHandlerImpl() {
 
     private val logger = LoggerFactory.getLogger(ConnectedHandler::class.java)
     private val gson = GsonBuilder().create()
 
     /**
-     * This will add the socket session and save the server information.
+     * This will add the socket session and save the server information. Alert
+     * will be sent to the discord.
      *
      * @param session           the web socket session
      * @param event             the event object.
@@ -41,6 +43,9 @@ class ConnectedHandler @Autowired constructor(private val serverService: ServerS
                 return@flatMap serverService.findById(UUID.fromString(info.id))
                     .flatMap { sendEvent(session, "connected_event", info) }
             }
-            .doOnSuccess { logger.info("Client connected: \nSession Id: ${session.id} \nServer Id: ${info.id}") }
+            .doOnSuccess {
+                logger.info("Client connected: \nSession Id: ${session.id} \nServer Id: ${info.id}")
+                discordService.sendAlert("Server connected: \nSession ID: ${session.id} \nServer ID: ${info.id}")
+            }
     }
 }
