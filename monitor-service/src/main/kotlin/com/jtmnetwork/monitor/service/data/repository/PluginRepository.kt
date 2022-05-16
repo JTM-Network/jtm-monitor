@@ -11,5 +11,5 @@ interface PluginRepository: ReactiveMongoRepository<Plugin, UUID> {
 
     fun findByName(name: String): Mono<Plugin>
 
-    fun findByNameAndVersion(name: String): Mono<Plugin>
+    fun findByNameAndVersion(name: String, version: String): Mono<Plugin>
 }

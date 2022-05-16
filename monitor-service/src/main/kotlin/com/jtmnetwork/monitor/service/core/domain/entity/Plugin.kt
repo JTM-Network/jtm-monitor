@@ -5,4 +5,4 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
 @Document("plugins")
-data class Plugin(@Id val id: UUID = UUID.randomUUID(), val name: String, val version: String, val uploaded: Long = System.currentTimeMillis())
+data class Plugin(@Id val id: UUID = UUID.randomUUID(), val name: String, val version: String, val path: String, val uploaded: Long = System.currentTimeMillis())

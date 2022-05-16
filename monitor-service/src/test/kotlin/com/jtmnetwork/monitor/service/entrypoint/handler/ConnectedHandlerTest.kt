@@ -5,6 +5,7 @@ import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import com.jtmnetwork.monitor.service.core.domain.model.ServerInfo
 import com.jtmnetwork.monitor.service.core.domain.model.Session
 import com.jtmnetwork.monitor.service.core.domain.model.event.Event
+import com.jtmnetwork.monitor.service.data.service.DiscordService
 import com.jtmnetwork.monitor.service.data.service.ServerService
 import com.jtmnetwork.monitor.service.data.service.SessionService
 import org.assertj.core.api.Assertions.assertThat
@@ -27,7 +28,8 @@ class ConnectedHandlerTest {
 
     private val serverService: ServerService = mock()
     private val sessionService: SessionService = mock()
-    private val connectedHandler = ConnectedHandler(serverService, sessionService)
+    private val discordService: DiscordService = mock()
+    private val connectedHandler = ConnectedHandler(serverService, sessionService, discordService)
 
     private val socket: WebSocketSession = mock()
     private val event = Event("connected_event", GsonBuilder().create().toJson(ServerInfo(UUID.randomUUID().toString(), "test", "0.1", "1.18", "1.18", 20, 25565, 14)))

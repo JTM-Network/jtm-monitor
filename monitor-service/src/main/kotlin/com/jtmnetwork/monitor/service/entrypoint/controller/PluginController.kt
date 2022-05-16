@@ -12,28 +12,23 @@ import java.util.*
 @RequestMapping("/plugin")
 class PluginController @Autowired constructor(private val pluginService: PluginService) {
 
-    @PostMapping
-    fun uploadPlugin(): Mono<Plugin> {
-        return Mono.empty()
-    }
-
     @GetMapping("/{id}")
     fun getPlugin(@PathVariable id: UUID): Mono<Plugin> {
-        return Mono.empty()
+        return pluginService.getPlugin(id)
     }
 
     @GetMapping
     fun getPlugin(@RequestParam("name") name: String, @RequestParam("version") version: String): Mono<Plugin> {
-        return Mono.empty()
+        return pluginService.getPlugin(name, version)
     }
 
     @GetMapping("/all")
     fun getPlugins(): Flux<Plugin> {
-        return Flux.empty()
+        return pluginService.getPlugins()
     }
 
     @DeleteMapping("/{id}")
     fun deletePlugin(@PathVariable id: UUID): Mono<Plugin> {
-        return Mono.empty()
+        return pluginService.removePlugin(id)
     }
 }
