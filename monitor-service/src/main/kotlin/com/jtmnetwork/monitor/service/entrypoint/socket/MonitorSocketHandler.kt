@@ -1,6 +1,6 @@
 package com.jtmnetwork.monitor.service.entrypoint.socket
 
-import com.jtmnetwork.monitor.service.data.service.SessionService
+import com.jtmnetwork.monitor.service.data.service.plugin.SessionService
 import com.jtmnetwork.monitor.service.entrypoint.event.EventDispatcher
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired

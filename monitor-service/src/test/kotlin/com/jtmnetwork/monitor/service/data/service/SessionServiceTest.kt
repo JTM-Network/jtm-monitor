@@ -3,6 +3,7 @@ package com.jtmnetwork.monitor.service.data.service
 import com.jtmnetwork.monitor.service.core.domain.model.Session
 import com.jtmnetwork.monitor.service.data.repository.LogRepository
 import com.jtmnetwork.monitor.service.data.repository.SessionRepository
+import com.jtmnetwork.monitor.service.data.service.plugin.SessionService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test

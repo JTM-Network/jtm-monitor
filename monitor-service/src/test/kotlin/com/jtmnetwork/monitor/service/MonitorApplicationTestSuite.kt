@@ -1,12 +1,12 @@
 package com.jtmnetwork.monitor.service
 
-import com.jtmnetwork.monitor.service.core.usecase.file.PluginFileHandlerTest
+import com.jtmnetwork.monitor.service.core.usecase.file.StoredPluginFileHandlerTest
 import com.jtmnetwork.monitor.service.data.service.LogServiceTest
-import com.jtmnetwork.monitor.service.data.service.PluginServiceTest
+import com.jtmnetwork.monitor.service.data.service.StoredPluginServiceTest
 import com.jtmnetwork.monitor.service.data.service.ServerServiceTest
 import com.jtmnetwork.monitor.service.data.service.SessionServiceTest
 import com.jtmnetwork.monitor.service.entrypoint.controller.CommandControllerTest
-import com.jtmnetwork.monitor.service.entrypoint.controller.PluginControllerTest
+import com.jtmnetwork.monitor.service.entrypoint.controller.StoredStoredPluginControllerTest
 import com.jtmnetwork.monitor.service.entrypoint.controller.ServerControllerTest
 import com.jtmnetwork.monitor.service.entrypoint.controller.SessionControllerTest
 import com.jtmnetwork.monitor.service.entrypoint.handler.ConnectedHandlerTest
@@ -16,16 +16,16 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(value = [
-    PluginFileHandlerTest::class,
+    StoredPluginFileHandlerTest::class,
 
     LogServiceTest::class,
     ServerServiceTest::class,
     SessionServiceTest::class,
-    PluginServiceTest::class,
+    StoredPluginServiceTest::class,
 
     SessionControllerTest::class,
     ServerControllerTest::class,
-    PluginControllerTest::class,
+    StoredStoredPluginControllerTest::class,
     CommandControllerTest::class,
 
     IncomingLogHandlerTest::class,

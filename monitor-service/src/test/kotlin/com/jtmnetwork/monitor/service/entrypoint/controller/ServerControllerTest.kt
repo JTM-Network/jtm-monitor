@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
-import com.jtmnetwork.monitor.service.data.service.ServerService
+import com.jtmnetwork.monitor.service.data.service.plugin.ServerService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`

@@ -2,6 +2,7 @@ package com.jtmnetwork.monitor.service.data.service
 
 import com.jtmnetwork.monitor.service.core.domain.exception.ConsoleNotFound
 import com.jtmnetwork.monitor.service.data.repository.LogRepository
+import com.jtmnetwork.monitor.service.data.service.plugin.LogService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

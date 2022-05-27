@@ -1,9 +1,10 @@
 package com.jtmnetwork.monitor.service.data.service
 
-import com.jtmnetwork.monitor.service.core.domain.entity.Plugin
+import com.jtmnetwork.monitor.service.core.domain.entity.StoredPlugin
 import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginFound
 import com.jtmnetwork.monitor.service.core.domain.exception.plugin.PluginNotFound
-import com.jtmnetwork.monitor.service.data.repository.PluginRepository
+import com.jtmnetwork.monitor.service.core.usecase.file.PluginFileHandler
+import com.jtmnetwork.monitor.service.data.repository.StoredPluginRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,12 +19,13 @@ import reactor.test.StepVerifier
 import java.util.*
 
 @RunWith(SpringRunner::class)
-class PluginServiceTest {
+class StoredPluginServiceTest {
 
-    private val pluginRepository: PluginRepository = mock()
-    private val pluginService = PluginService(pluginRepository)
+    private val pluginRepository: StoredPluginRepository = mock()
+    private val fileHandler: PluginFileHandler = mock()
+    private val pluginService = StoredPluginService(pluginRepository, fileHandler)
 
-    private val plugin = Plugin(name = "test", version = "1.0", path = "/")
+    private val plugin = StoredPlugin(name = "test", version = "1.0", path = "/")
 
     @Test
     fun insertPlugin_thenFound() {
@@ -124,7 +126,7 @@ class PluginServiceTest {
 
     @Test
     fun getPlugins() {
-        `when`(pluginRepository.findAll()).thenReturn(Flux.just(plugin, Plugin(name = "test #2", version = "0.1", path = "/test.jar")))
+        `when`(pluginRepository.findAll()).thenReturn(Flux.just(plugin, StoredPlugin(name = "test #2", version = "0.1", path = "/test.jar")))
 
         val returned = pluginService.getPlugins()
 

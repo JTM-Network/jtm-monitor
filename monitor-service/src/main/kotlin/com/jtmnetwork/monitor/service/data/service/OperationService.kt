@@ -15,4 +15,8 @@ class OperationService @Autowired constructor(private val observer: OperationObs
         val sink = observer.addOperation(ResourceSearchOperation(query)) ?: return Flux.error(FailedStartOperation())
         return sink.asFlux().map { ServerSentEvent.builder(it).build() }
     }
+
+    fun installPlugin(server: String, pluginId: String): Flux<ServerSentEvent<String>> {
+        return Flux.empty()
+    }
 }

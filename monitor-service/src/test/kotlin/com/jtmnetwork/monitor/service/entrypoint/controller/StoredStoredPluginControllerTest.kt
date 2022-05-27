@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
-import com.jtmnetwork.monitor.service.core.domain.entity.Plugin
-import com.jtmnetwork.monitor.service.data.service.PluginService
+import com.jtmnetwork.monitor.service.core.domain.entity.StoredPlugin
+import com.jtmnetwork.monitor.service.data.service.StoredPluginService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.*
@@ -19,17 +19,17 @@ import reactor.core.publisher.Mono
 import java.util.*
 
 @RunWith(SpringRunner::class)
-@WebFluxTest(PluginController::class)
+@WebFluxTest(StoredPluginController::class)
 @AutoConfigureWebTestClient
-class PluginControllerTest {
+class StoredStoredPluginControllerTest {
 
     @Autowired
     lateinit var client: WebTestClient
 
     @MockBean
-    lateinit var pluginService: PluginService
+    lateinit var pluginService: StoredPluginService
 
-    private val plugin = Plugin(name = "test", version = "1.0", path = "/")
+    private val plugin = StoredPlugin(name = "test", version = "1.0", path = "/")
 
     @Test
     fun getPlugin() {
@@ -65,7 +65,7 @@ class PluginControllerTest {
 
     @Test
     fun getPlugins() {
-        `when`(pluginService.getPlugins()).thenReturn(Flux.just(plugin, Plugin(name = "test #2", version = "0.1", path = "/test.jar")))
+        `when`(pluginService.getPlugins()).thenReturn(Flux.just(plugin, StoredPlugin(name = "test #2", version = "0.1", path = "/test.jar")))
 
         client.get()
             .uri("/plugin/all")

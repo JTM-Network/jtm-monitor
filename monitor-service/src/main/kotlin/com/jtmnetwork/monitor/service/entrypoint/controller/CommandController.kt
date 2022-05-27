@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.model.CommandDTO
-import com.jtmnetwork.monitor.service.data.service.CommandService
+import com.jtmnetwork.monitor.service.data.service.plugin.CommandService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

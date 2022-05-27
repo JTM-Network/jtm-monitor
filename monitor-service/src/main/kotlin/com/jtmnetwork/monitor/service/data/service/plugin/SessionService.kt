@@ -1,4 +1,4 @@
-package com.jtmnetwork.monitor.service.data.service
+package com.jtmnetwork.monitor.service.data.service.plugin
 
 import com.jtmnetwork.monitor.service.core.domain.model.Session
 import com.jtmnetwork.monitor.service.data.repository.LogRepository

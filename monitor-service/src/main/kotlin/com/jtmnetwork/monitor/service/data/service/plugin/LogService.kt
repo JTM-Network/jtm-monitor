@@ -1,4 +1,4 @@
-package com.jtmnetwork.monitor.service.data.service
+package com.jtmnetwork.monitor.service.data.service.plugin
 
 import com.jtmnetwork.monitor.service.core.domain.exception.ConsoleNotFound
 import com.jtmnetwork.monitor.service.core.domain.model.Console

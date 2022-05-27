@@ -15,7 +15,7 @@ import reactor.test.StepVerifier
 import java.io.File
 
 @RunWith(SpringRunner::class)
-class PluginFileHandlerTest {
+class StoredPluginFileHandlerTest {
 
     private val fileHandler = PluginFileHandler()
     private val part: FilePart = mock()

@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.model.Console
-import com.jtmnetwork.monitor.service.data.service.LogService
+import com.jtmnetwork.monitor.service.data.service.plugin.LogService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.codec.ServerSentEvent

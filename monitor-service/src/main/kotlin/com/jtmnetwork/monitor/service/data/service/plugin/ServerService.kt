@@ -1,4 +1,4 @@
-package com.jtmnetwork.monitor.service.data.service
+package com.jtmnetwork.monitor.service.data.service.plugin
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import com.jtmnetwork.monitor.service.core.domain.exception.ServerNotFound

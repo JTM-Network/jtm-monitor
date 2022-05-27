@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.model.Session
-import com.jtmnetwork.monitor.service.data.service.SessionService
+import com.jtmnetwork.monitor.service.data.service.plugin.SessionService
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

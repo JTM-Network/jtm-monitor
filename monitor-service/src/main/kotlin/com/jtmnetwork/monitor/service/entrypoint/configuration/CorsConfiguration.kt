@@ -14,10 +14,10 @@ open class CorsConfiguration {
     @Bean
     open fun corsWebFilter(): CorsWebFilter {
         val corsConfig = CorsConfiguration()
-        corsConfig.allowedOrigins = Arrays.asList("http://localhost:3000")
+        corsConfig.allowedOrigins = listOf("http://localhost:3000")
         corsConfig.maxAge = 8000L
-        corsConfig.allowedMethods = Arrays.asList("OPTION", "POST", "PUT", "GET", "DELETE", "PATCH")
-        corsConfig.allowedHeaders = Arrays.asList("")
+        corsConfig.allowedMethods = listOf("*")
+        corsConfig.allowedHeaders = listOf("*")
 
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", corsConfig)

@@ -4,6 +4,7 @@ import com.jtmnetwork.monitor.service.core.domain.entity.Server
 import com.jtmnetwork.monitor.service.core.domain.exception.ServerNotFound
 import com.jtmnetwork.monitor.service.core.usecase.server.ServerRepository
 import com.jtmnetwork.monitor.service.data.cache.ServerCache
+import com.jtmnetwork.monitor.service.data.service.plugin.ServerService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

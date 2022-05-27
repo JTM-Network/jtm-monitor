@@ -6,8 +6,8 @@ import com.jtmnetwork.monitor.service.core.domain.model.ServerInfo
 import com.jtmnetwork.monitor.service.core.domain.model.Session
 import com.jtmnetwork.monitor.service.core.domain.model.event.Event
 import com.jtmnetwork.monitor.service.data.service.DiscordService
-import com.jtmnetwork.monitor.service.data.service.ServerService
-import com.jtmnetwork.monitor.service.data.service.SessionService
+import com.jtmnetwork.monitor.service.data.service.plugin.ServerService
+import com.jtmnetwork.monitor.service.data.service.plugin.SessionService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test

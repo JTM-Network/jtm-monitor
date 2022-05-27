@@ -1,11 +1,10 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.model.CommandDTO
-import com.jtmnetwork.monitor.service.data.service.CommandService
+import com.jtmnetwork.monitor.service.data.service.plugin.CommandService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.*
-import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.anyOrNull
 import org.mockito.kotlin.verify
 import org.springframework.beans.factory.annotation.Autowired

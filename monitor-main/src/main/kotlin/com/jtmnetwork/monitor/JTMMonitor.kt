@@ -15,7 +15,7 @@ class JTMMonitor {
         private lateinit var registry: EventRegistry
 
         fun setup(framework: Framework) {
-            injector = Guice.createInjector(MonitorModule(framework), EventModule())
+            injector = framework.injector(listOf(MonitorModule(framework), EventModule()))
             registry = EventRegistry(getEventRepository(), injector)
         }
 

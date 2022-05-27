@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.http.codec.multipart.FilePart
+import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.io.File
 
+@Component
 class PluginFileHandler {
 
     private val logger = LoggerFactory.getLogger(PluginFileHandler::class.java)

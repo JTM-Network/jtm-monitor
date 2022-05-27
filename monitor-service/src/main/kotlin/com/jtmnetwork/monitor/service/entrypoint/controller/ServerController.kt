@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.service.entrypoint.controller
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
-import com.jtmnetwork.monitor.service.data.service.ServerService
+import com.jtmnetwork.monitor.service.data.service.plugin.ServerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
