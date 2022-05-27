@@ -15,10 +15,6 @@ import java.util.logging.LogRecord
 @Singleton
 class LogAppender @Inject constructor(private val connection: MonitorConnection): AbstractAppender("MonitorLogAppender", null, PatternLayout.newBuilder().withPattern("[%d{HH:mm:ss} %level]: %msg").build()) {
 
-    init {
-        start()
-    }
-
     private val logger = LoggerFactory.getLogger(LogAppender::class.java)
 
     override fun append(event: LogEvent) {

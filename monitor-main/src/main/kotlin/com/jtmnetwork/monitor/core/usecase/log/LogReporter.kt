@@ -10,7 +10,7 @@ import java.io.File
 import java.util.*
 
 
-class LogReporter @Inject constructor(private val framework: Framework, private val logAppender: LogAppender) {
+class LogReporter @Inject constructor(framework: Framework, private val logAppender: LogAppender) {
 
     private val logger = LoggerFactory.getLogger(LogReporter::class.java)
     private val file = File("${framework.server.worldContainer.path}/logs/latest.log")
