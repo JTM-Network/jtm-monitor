@@ -13,6 +13,6 @@ class CommandHandler @Inject constructor(private val framework: Framework): Even
     private val logger = LoggerFactory.getLogger(CommandHandler::class.java)
 
     override fun onEvent(socket: WebSocket, event: Event) {
-        framework.runTask { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), event.value) }
+        framework.runTask { framework.server.dispatchCommand(framework.server.consoleSender, event.value) }
     }
 }

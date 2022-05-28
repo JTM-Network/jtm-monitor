@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory
 class MonitorConnection @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
 
     private val logger = LoggerFactory.getLogger(MonitorConnection::class.java)
-    private val client = OkHttpClient.Builder().build()
     private val gson = GsonBuilder().setPrettyPrinting().create()
+    var client = OkHttpClient.Builder().build()
 
-    private lateinit var socket: WebSocket
+    lateinit var socket: WebSocket
 
     fun connect() {
         val request = Request.Builder().url("ws://local.jtm-network.com:8787/monitor").build()

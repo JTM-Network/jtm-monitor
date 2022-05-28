@@ -23,8 +23,8 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
     /**
      * Using the server id sent by the server, persist it in the server configuration
      *
-     * @param socket        the web socket
-     * @param event         the event being sent.
+     * @param socket            the web socket
+     * @param event             the event being sent.
      */
     override fun onEvent(socket: WebSocket, event: Event) {
         val info = gson.fromJson(event.value, ServerInfo::class.java)

@@ -87,5 +87,5 @@ test {
 }
 
 shadowJar {
-    destinationDirectory = file("/media/michelle/Programming/Programming/Servers/lobby/plugins")
+    destinationDirectory = file("/mnt/65f8f8c0-a736-45bf-a047-782b19fc195b/Programming/Servers/lobby/plugins")
 }

@@ -25,8 +25,7 @@ class MonitorListener(framework: Framework, private val configuration: ServerCon
 
     override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
         super.onFailure(webSocket, t, response)
-        logger.info("Retrying connection in 5 seconds.")
-        t.printStackTrace()
+        logger.info("Retrying connection in 5 seconds: ${t.message}")
     }
 
     override fun onMessage(webSocket: WebSocket, text: String) {

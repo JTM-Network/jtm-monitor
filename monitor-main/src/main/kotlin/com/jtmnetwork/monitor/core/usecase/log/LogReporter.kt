@@ -12,7 +12,6 @@ import java.util.*
 
 class LogReporter @Inject constructor(framework: Framework, private val logAppender: LogAppender) {
 
-    private val logger = LoggerFactory.getLogger(LogReporter::class.java)
     private val file = File("${framework.server.worldContainer.path}/logs/latest.log")
 
     fun init() {
@@ -22,9 +21,7 @@ class LogReporter @Inject constructor(framework: Framework, private val logAppen
 
     fun getLogs(): LinkedList<String> {
         val list: LinkedList<String> = LinkedList()
-
         file.bufferedReader().readLines().forEach { list.add(it) }
-
         return list
     }
 }

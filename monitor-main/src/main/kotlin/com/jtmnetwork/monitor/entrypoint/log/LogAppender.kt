@@ -19,9 +19,7 @@ class LogAppender @Inject constructor(private val connection: MonitorConnection)
 
     override fun append(event: LogEvent) {
         val list: LinkedList<String> = LinkedList()
-
         list.add(event.message.format)
-
         connection.sendEvent("incoming_log_event", ServerLog(list))
     }
 }
