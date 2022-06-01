@@ -31,21 +31,25 @@ class ConnectedHandler @Autowired constructor(private val serverService: ServerS
      */
     override fun onEvent(session: WebSocketSession, event: Event): Mono<WebSocketMessage> {
         val info = gson.fromJson(event.value, ServerInfo::class.java)
-        return sessionService.insert(session)
-            .flatMap {
-                if (info.id.isBlank())
-                    return@flatMap serverService.insert(Server(index = 0))
-                        .flatMap {
-                            info.id = it.id.toString()
-                            sendEvent(session, "connected_event", info)
-                        }
+        return serverService.findAll().collectList()
+                .map { it.size }
+                .flatMap { index -> sessionService.insert(session)
+                    .flatMap {
+                        if (info.id.isBlank())
+                            return@flatMap serverService.insert(Server(index = (index + 1)))
+                                    .flatMap {
+                                        info.id = it.id.toString()
+                                        sendEvent(session, "connected_event", info)
+                                    }
 
-                return@flatMap serverService.findById(UUID.fromString(info.id))
-                    .flatMap { sendEvent(session, "connected_event", info) }
-            }
-            .doOnSuccess {
-                logger.info("Client connected: \nSession Id: ${session.id} \nServer Id: ${info.id}")
-                discordService.sendAlert("Server connected: \nSession ID: ${session.id} \nServer ID: ${info.id}")
-            }
+                        return@flatMap serverService.findById(UUID.fromString(info.id))
+                                .switchIfEmpty(serverService.insert(Server(id = UUID.fromString(info.id), (index + 1))))
+                                .flatMap { sendEvent(session, "connected_event", info) }
+                    }
+                    .doOnSuccess {
+                        logger.info("Client connected: \nSession Id: ${session.id} \nServer Id: ${info.id}")
+                        discordService.sendAlert("Server connected: \nSession ID: ${session.id} \nServer ID: ${info.id}")
+                    }
+        }
     }
 }

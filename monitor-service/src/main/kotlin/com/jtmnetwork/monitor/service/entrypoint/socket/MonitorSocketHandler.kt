@@ -20,7 +20,7 @@ class MonitorSocketHandler @Autowired constructor(private val eventDispatcher: E
             .doFinally {
                 session.close()
                 sessionService.deleteById(session.id)
-                logger.info("Client disconnected: \nSession Id: ${session.id}")
+                logger.info("Client disconnected: \nSession Id: ${session.id} \nSignal: ${it.name}")
             }
         )
     }
