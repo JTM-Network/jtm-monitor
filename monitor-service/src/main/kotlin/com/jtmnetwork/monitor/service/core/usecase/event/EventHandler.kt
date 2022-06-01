@@ -8,5 +8,7 @@ import reactor.core.publisher.Mono
 interface EventHandler {
     fun onEvent(session: WebSocketSession, event: Event): Mono<WebSocketMessage>
 
-    fun sendEvent(session: WebSocketSession, name: String, value: Any): Mono<WebSocketMessage>
+    fun sendEvent(session: WebSocketSession, value: Any): Mono<WebSocketMessage>
+
+    fun getName(): String
 }

@@ -6,15 +6,19 @@ import org.springframework.web.reactive.socket.WebSocketMessage
 import org.springframework.web.reactive.socket.WebSocketSession
 import reactor.core.publisher.Mono
 
-abstract class EventHandlerImpl: EventHandler {
+abstract class EventHandlerImpl(private val name: String): EventHandler {
 
     private val gson = GsonBuilder().setPrettyPrinting().create()
 
-    override fun sendEvent(session: WebSocketSession, name: String, value: Any): Mono<WebSocketMessage> {
-        return message(session, name, value)
+    override fun sendEvent(session: WebSocketSession, value: Any): Mono<WebSocketMessage> {
+        return message(session, value)
     }
 
-    private fun message(session: WebSocketSession, name: String, value: Any): Mono<WebSocketMessage> {
+    override fun getName(): String {
+        return this.name
+    }
+
+    private fun message(session: WebSocketSession, value: Any): Mono<WebSocketMessage> {
         val event = Event(name, gson.toJson(value))
         return Mono.just(session.textMessage(gson.toJson(event)))
     }

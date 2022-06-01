@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono
 import java.util.*
 
 @Component
-class ConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService, private val discordService: DiscordService): EventHandlerImpl() {
+class ConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService, private val discordService: DiscordService): EventHandlerImpl("connected_event") {
 
     private val logger = LoggerFactory.getLogger(ConnectedHandler::class.java)
     private val gson = GsonBuilder().create()
@@ -39,12 +39,12 @@ class ConnectedHandler @Autowired constructor(private val serverService: ServerS
                             return@flatMap serverService.insert(Server(index = (index + 1)))
                                     .flatMap {
                                         info.id = it.id.toString()
-                                        sendEvent(session, "connected_event", info)
+                                        sendEvent(session, info)
                                     }
 
                         return@flatMap serverService.findById(UUID.fromString(info.id))
                                 .switchIfEmpty(serverService.insert(Server(id = UUID.fromString(info.id), (index + 1))))
-                                .flatMap { sendEvent(session, "connected_event", info) }
+                                .flatMap { sendEvent(session, info) }
                     }
                     .doOnSuccess {
                         logger.info("Client connected: \nSession Id: ${session.id} \nServer Id: ${info.id}")

@@ -8,14 +8,25 @@ import java.io.Serializable
 import java.util.*
 
 @Document("servers")
-data class Server(@Id val id: UUID = UUID.randomUUID(), val index: Int, var plugins: List<Plugin> = listOf(), val created: Long = System.currentTimeMillis()): Serializable {
+data class Server(@Id val id: UUID = UUID.randomUUID(), val index: Int, var plugins: Map<String, Plugin> = mapOf(), val created: Long = System.currentTimeMillis()): Serializable {
 
     fun update(server: Server): Server {
         return this
     }
 
-    fun updatePlugins(plugins: List<Plugin>): Server {
+    fun updatePlugins(plugins: Map<String, Plugin>): Server {
         this.plugins = plugins
+        return this
+    }
+
+    fun enable(name: String): Server {
+        val plugin = plugins[name] ?: return this
+        plugin.enabled()
+        return this
+    }
+    fun disable(name: String): Server {
+        val plugin = plugins[name] ?: return this
+        plugin.disabled()
         return this
     }
 }

@@ -3,6 +3,9 @@ package com.jtmnetwork.monitor.service.data.repository
 import com.jtmnetwork.monitor.service.core.usecase.event.EventHandler
 import com.jtmnetwork.monitor.service.entrypoint.handler.ConnectedHandler
 import com.jtmnetwork.monitor.service.entrypoint.handler.log.IncomingLogHandler
+import com.jtmnetwork.monitor.service.entrypoint.handler.plugin.DisablePluginHandler
+import com.jtmnetwork.monitor.service.entrypoint.handler.plugin.EnablePluginHandler
+import com.jtmnetwork.monitor.service.entrypoint.handler.plugin.UpdatePluginHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Component
@@ -18,13 +21,16 @@ class EventRepository @Autowired constructor(private val context: ApplicationCon
 
     @PostConstruct
     fun init() {
-        insertHandler("connected_event", context.getBean(ConnectedHandler::class.java))
-        insertHandler("incoming_log_event", context.getBean(IncomingLogHandler::class.java))
+        insertHandler(context.getBean(ConnectedHandler::class.java))
+        insertHandler(context.getBean(IncomingLogHandler::class.java))
+        insertHandler(context.getBean(UpdatePluginHandler::class.java))
+        insertHandler(context.getBean(EnablePluginHandler::class.java))
+        insertHandler(context.getBean(DisablePluginHandler::class.java))
     }
 
-    private fun insertHandler(name: String, handler: EventHandler): Boolean {
-        if (map.containsKey(name)) return false
-        map[name] = handler
+    private fun insertHandler(handler: EventHandler): Boolean {
+        if (map.containsKey(handler.getName())) return false
+        map[handler.getName()] = handler
         return true
     }
 

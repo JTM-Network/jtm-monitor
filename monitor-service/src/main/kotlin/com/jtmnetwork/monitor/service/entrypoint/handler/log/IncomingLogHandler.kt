@@ -13,7 +13,7 @@ import org.springframework.web.reactive.socket.WebSocketSession
 import reactor.core.publisher.Mono
 
 @Component
-class IncomingLogHandler @Autowired constructor(private val logRepository: LogRepository): EventHandlerImpl() {
+class IncomingLogHandler @Autowired constructor(private val logRepository: LogRepository): EventHandlerImpl("incoming_log_event") {
 
     private val logger = LoggerFactory.getLogger(IncomingLogHandler::class.java)
     private val gson = GsonBuilder().create()
