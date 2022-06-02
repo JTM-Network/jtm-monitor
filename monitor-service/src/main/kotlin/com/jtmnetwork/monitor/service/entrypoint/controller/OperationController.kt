@@ -17,7 +17,7 @@ class OperationController @Autowired constructor(private val operationService: O
     }
 
     @GetMapping("/install/{server}", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
-    fun installPlugin(@PathVariable server: String, @RequestParam("plugin_id") pluginId: String): Flux<ServerSentEvent<String>> {
+    fun installPlugin(@PathVariable server: String, @RequestParam("name") name: String, @RequestParam("version") version: String, @RequestParam("plugin_id") pluginId: String): Flux<ServerSentEvent<String>> {
         return Flux.empty()
     }
 }

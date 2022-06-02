@@ -18,10 +18,8 @@ class EventDispatcher @Autowired constructor(private val eventRepository: EventR
 
     fun dispatch(session: WebSocketSession, str: String): Mono<WebSocketMessage> {
         try {
-            logger.info("Received message.")
             val event = gson.fromJson(str, Event::class.java)
             val handler = eventRepository.getHandler(event.name) ?: return Mono.empty()
-            logger.info("Found handler.")
             return handler.onEvent(session, event)
         } catch (ex: Exception) {
             ex.printStackTrace()
