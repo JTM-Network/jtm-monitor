@@ -10,10 +10,20 @@ class DiscordService @Autowired constructor(jda: JDA) {
 
     private val requester = DefaultRequester(jda)
 
+    /**
+     * Send a message through the discord bot.
+     *
+     * @param message                   the message
+     */
     fun sendMessage(message: String) {
         requester.sendMessage(message)
     }
 
+    /**
+     * Send an alert to discord.
+     *
+     * @param message                   the message
+     */
     fun sendAlert(message: String) {
         requester.sendAlert(message)
     }

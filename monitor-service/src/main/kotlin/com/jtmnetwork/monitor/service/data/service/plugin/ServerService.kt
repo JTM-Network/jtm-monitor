@@ -17,7 +17,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
      * Store new server information indexed.
      *
      * @param server        the server to be inserted
-     * @return server       the server that was saved.
+     * @return              the server that was saved.
      */
     fun insert(server: Server): Mono<Server> {
         return repository.findAll()
@@ -30,7 +30,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
      * Update the server information saved.
      *
      * @param server        the update server
-     * @return server       the updated server
+     * @return              the updated server
      */
     fun update(server: Server): Mono<Server> {
         return repository.findById(server.id)
@@ -42,7 +42,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
      * Find server by identifier
      *
      * @param id            the identifier.
-     * @return server       the server found.
+     * @return              the server found.
      */
     fun findById(id: UUID): Mono<Server> {
         return repository.findById(id)
@@ -52,7 +52,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
     /**
      * Find all servers.
      *
-     * @return server       the servers that have been saved.
+     * @return              the servers that have been saved.
      */
     fun findAll(): Flux<Server> {
         return repository.findAll()
@@ -62,7 +62,7 @@ class ServerService @Autowired constructor(private val repository: ServerReposit
      * Delete the server by identifier.
      *
      * @param id            the identifier
-     * @return server       the deleted server.
+     * @return              the deleted server.
      */
     fun deleteById(id: UUID): Mono<Server> {
         return repository.findById(id)

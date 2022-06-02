@@ -15,6 +15,9 @@ open class DiscordConfiguration {
     @Value("\${discord.api:key}")
     lateinit var key: String
 
+    /**
+     * Setup JDA Discord bot.
+     */
     @Bean
     open fun discordBot(): JDA {
         val builder = JDABuilder.createDefault(key)

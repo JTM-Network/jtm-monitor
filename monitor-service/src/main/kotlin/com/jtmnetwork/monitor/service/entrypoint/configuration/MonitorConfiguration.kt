@@ -15,6 +15,9 @@ open class MonitorConfiguration {
     @Autowired
     lateinit var socketHandler: MonitorSocketHandler
 
+    /**
+     * Setup minecraft server monitor socket handler.
+     */
     @Bean
     open fun handlerMapping(): HandlerMapping {
         val map: MutableMap<String, WebSocketHandler> = HashMap()

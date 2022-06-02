@@ -11,6 +11,9 @@ import java.util.*
 @Configuration
 open class CorsConfiguration {
 
+    /**
+     * Setup global CORS configuration.
+     */
     @Bean
     open fun corsWebFilter(): CorsWebFilter {
         val corsConfig = CorsConfiguration()

@@ -11,11 +11,26 @@ import reactor.core.publisher.Flux
 @Service
 class OperationService @Autowired constructor(private val observer: OperationObserver) {
 
+    /**
+     * Start search query and return a progress sink.
+     *
+     * @param query                     the search query
+     * @return                          the progress stream to alert the user.
+     * @see                             ServerSentEvent<String>
+     */
     fun search(query: String): Flux<ServerSentEvent<String>> {
         val sink = observer.addOperation(ResourceSearchOperation(query)) ?: return Flux.error(FailedStartOperation())
         return sink.asFlux().map { ServerSentEvent.builder(it).build() }
     }
 
+    /**
+     * Start installing a plugin selected on to the selected server.
+     *
+     * @param server                    the server id
+     * @param pluginId                  the plugin id
+     * @return                          the progress sink
+     * @see                             ServerSentEvent<String>
+     */
     fun installPlugin(server: String, pluginId: String): Flux<ServerSentEvent<String>> {
         return Flux.empty()
     }

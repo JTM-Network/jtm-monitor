@@ -12,6 +12,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 @Configuration
 open class RedisConfiguration {
 
+    /**
+     * Setup Key & Value serializer.
+     */
     @Bean
     open fun reactiveRedisTemplate(factory: ReactiveRedisConnectionFactory): ReactiveRedisTemplate<String, CachedServer> {
         val keySerializer = StringRedisSerializer()

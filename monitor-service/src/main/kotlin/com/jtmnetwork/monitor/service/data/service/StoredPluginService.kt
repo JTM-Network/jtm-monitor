@@ -20,7 +20,7 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
      * @param name              the name of the plugin.
      * @param version           the version of the plugin.
      * @param path              the path to the plugin file.
-     * @return plugin           the plugin inserted
+     * @return                  the plugin inserted
      * @see                     StoredPlugin
      *
      * @throws PluginNotFound   if the plugin is not found.
@@ -35,7 +35,7 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
      * Fetch the plugin using the identifier
      *
      * @param id                the identifier
-     * @return plugin           the plugin found.
+     * @return                  the plugin found.
      * @see                     StoredPlugin
      *
      * @throws PluginNotFound   if the plugin is not found.
@@ -50,7 +50,7 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
      *
      * @param name              the name of the plugin
      * @param version           the version of the plugin
-     * @return plugin           the plugin found.
+     * @return                  the plugin found.
      * @see                     StoredPlugin
      *
      * @throws PluginNotFound   if the plugin is not found.
@@ -63,7 +63,7 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
     /**
      * Fetches all the plugins.
      *
-     * @return plugin           the list of plugins
+     * @return                  the list of plugins
      * @see                     StoredPlugin
      */
     fun getPlugins(): Flux<StoredPlugin> = pluginRepository.findAll()
@@ -72,7 +72,7 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
      * Removes the plugin using the identifier.
      *
      * @param id                the identifier
-     * @return plugin           the deleted plugin.
+     * @return                  the deleted plugin.
      * @see                     StoredPlugin
      *
      * @throws PluginNotFound   if the plugin is not found.

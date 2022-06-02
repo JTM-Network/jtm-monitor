@@ -17,10 +17,18 @@ import java.util.stream.Collectors
 @RequestMapping("/logs")
 class LogController @Autowired constructor(private val logService: LogService) {
 
+    /**
+     * Get console log stream using id.
+     *
+     * @param id                    the id of the websocket session.
+     * @return                      the Flux of the Sink.Many
+     * @see                         ServerSentEvent<String>
+     */
     @GetMapping("/{id}", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun getConsoleLogs(@PathVariable id: String): Flux<ServerSentEvent<String>> {
         return logService.getConsoleLogs(id)
     }
+
 
     @GetMapping("/all")
     fun getConsoles(): Mono<Array<Console>> {

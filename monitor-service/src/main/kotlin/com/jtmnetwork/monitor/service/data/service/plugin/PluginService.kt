@@ -11,16 +11,40 @@ import java.util.UUID
 @Service
 class PluginService @Autowired constructor(private val serverRepository: ServerRepository) {
 
+    /**
+     * Update the servers plugins.
+     *
+     * @param id                    the server identifier.
+     * @param plugins               the plugins to update with.
+     * @return                      the server they updated.
+     * @see                         Server
+     */
     fun updatePlugins(id: UUID, plugins: Map<String, Plugin>): Mono<Server> {
         return serverRepository.findById(id)
                 .flatMap { serverRepository.save(it.updatePlugins(plugins)) }
     }
 
+    /**
+     * Enable the plugin using the server identifier & plugin name.
+     *
+     * @param id                    the server identifier.
+     * @param name                  the plugin name.
+     * @return                      the server they enabled the plugin on.
+     * @see                         Server
+     */
     fun enablePlugin(id: UUID, name: String): Mono<Server> {
         return serverRepository.findById(id)
                 .flatMap { serverRepository.save(it.enable(name)) }
     }
 
+    /**
+     * Disable the plugin using the server identifier & plugin name.
+     *
+     * @param id                    the server identifier.
+     * @param name                  the plugin name.
+     * @return                      the server they disabled the plugin on.
+     * @see                         Server
+     */
     fun disablePlugin(id: UUID, name: String): Mono<Server> {
         return serverRepository.findById(id)
                 .flatMap { serverRepository.save(it.disable(name)) }

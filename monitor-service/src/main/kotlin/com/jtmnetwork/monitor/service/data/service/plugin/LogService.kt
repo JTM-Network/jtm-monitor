@@ -14,8 +14,8 @@ class LogService @Autowired constructor(private val logRepository: LogRepository
     /**
      * Receive a Server Sent Event text stream of console messages.
      *
-     * @param id        the id of the socket session
-     * @return          ServerSentEvent<String>
+     * @param id                    the id of the socket session
+     * @return                      ServerSentEvent<String>
      */
     fun getConsoleLogs(id: String): Flux<ServerSentEvent<String>> {
         val sink = logRepository.getSink(id) ?: return Flux.error(ConsoleNotFound())
@@ -24,6 +24,8 @@ class LogService @Autowired constructor(private val logRepository: LogRepository
 
     /**
      * Get all console sessions created.
+     *
+     * @return                      Console
      */
     fun getConsoles(): Flux<Console> {
         return logRepository.getSinks()

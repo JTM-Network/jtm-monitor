@@ -16,7 +16,7 @@ class SessionService @Autowired constructor(private val sessionRepository: Sessi
      * Insert a web socket session.
      *
      * @param session               the socket session
-     * @return session              the inserted socket session
+     * @return                      the inserted socket session
      */
     fun insert(session: WebSocketSession): Mono<Session> {
         val ses = sessionRepository.addSession(session) ?: return Mono.empty()
@@ -28,7 +28,7 @@ class SessionService @Autowired constructor(private val sessionRepository: Sessi
      * Find the socket session by identifier.
      *
      * @param id                    the identifier of the session
-     * @return session              the session found.
+     * @return                      the session found.
      */
     fun findById(id: String): Mono<Session> {
         val session = sessionRepository.getSession(id) ?: return Mono.empty()
@@ -38,7 +38,7 @@ class SessionService @Autowired constructor(private val sessionRepository: Sessi
     /**
      * Find all the socket sessions
      *
-     * @return session              the socket sessions found.
+     * @return                      the socket sessions found.
      */
     fun findAll(): Flux<Session> {
         val sessions = sessionRepository.getSessions()
@@ -49,7 +49,7 @@ class SessionService @Autowired constructor(private val sessionRepository: Sessi
      * Delete the socket session by identifier
      *
      * @param id                    the socket session identifier
-     * @return session              the socket session found.
+     * @return                      the socket session found.
      */
     fun deleteById(id: String): Mono<Session> {
         val deleted = sessionRepository.removeSession(id) ?: return Mono.empty()
