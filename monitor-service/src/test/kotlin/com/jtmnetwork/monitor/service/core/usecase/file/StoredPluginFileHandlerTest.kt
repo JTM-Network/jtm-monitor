@@ -22,7 +22,7 @@ class StoredPluginFileHandlerTest {
 
     @Before
     fun setup() {
-        fileHandler.path = "/home/michelle/plugins"
+        fileHandler.path = "~/plugins"
         val folder = File(fileHandler.path + "/test")
         folder.mkdirs()
 

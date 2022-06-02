@@ -25,10 +25,12 @@ class StoredPluginService @Autowired constructor(private val pluginRepository: S
      *
      * @throws PluginNotFound   if the plugin is not found.
      */
-    fun insertPlugin(name: String, version: String, path: String): Mono<StoredPlugin> {
+    fun insertPlugin(name: String, version: String, file: ByteArray): Mono<StoredPlugin> {
         return pluginRepository.findByNameAndVersion(name, version)
             .flatMap<StoredPlugin> { Mono.error(PluginFound()) }
-            .switchIfEmpty(Mono.defer { pluginRepository.save(StoredPlugin(name = name, version = version, path = path)) })
+            .switchIfEmpty(Mono.defer { fileHandler.save(name, version, file)
+                    .flatMap { path -> pluginRepository.save(StoredPlugin(name = name, version = version, path = path)) }
+            })
     }
 
     /**

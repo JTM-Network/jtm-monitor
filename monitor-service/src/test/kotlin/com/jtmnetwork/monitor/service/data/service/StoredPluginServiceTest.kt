@@ -26,12 +26,13 @@ class StoredPluginServiceTest {
     private val pluginService = StoredPluginService(pluginRepository, fileHandler)
 
     private val plugin = StoredPlugin(name = "test", version = "1.0", path = "/")
+    private val array: ByteArray = "test".toByteArray()
 
     @Test
     fun insertPlugin_thenFound() {
         `when`(pluginRepository.findByNameAndVersion(anyString(), anyString())).thenReturn(Mono.just(plugin))
 
-        val returned = pluginService.insertPlugin("test", "1.0", "/")
+        val returned = pluginService.insertPlugin("test", "1.0", array)
 
         verify(pluginRepository, times(1)).findByNameAndVersion(anyString(), anyString())
         verifyNoMoreInteractions(pluginRepository)
@@ -46,7 +47,7 @@ class StoredPluginServiceTest {
         `when`(pluginRepository.findByNameAndVersion(anyString(), anyString())).thenReturn(Mono.empty())
         `when`(pluginRepository.save(anyOrNull())).thenReturn(Mono.just(plugin))
 
-        val returned = pluginService.insertPlugin("test", "1.0", "/")
+        val returned = pluginService.insertPlugin("test", "1.0", array)
 
         verify(pluginRepository, times(1)).findByNameAndVersion(anyString(), anyString())
         verifyNoMoreInteractions(pluginRepository)

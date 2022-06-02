@@ -12,12 +12,23 @@ import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.io.File
+import java.io.FileOutputStream
 
 @Component
 class PluginFileHandler {
 
     private val logger = LoggerFactory.getLogger(PluginFileHandler::class.java)
     var path = "/plugins"
+
+    fun save(name: String, version: String, fileArray: ByteArray): Mono<String> {
+        val folder = File("$path/$name")
+        if (!folder.exists() && folder.mkdirs()) logger.info("Created directories at: ${folder.path}")
+        val file = File("$path/$name", "$name-$version.jar")
+        val fos = FileOutputStream(file)
+        fos.write(fileArray)
+        fos.close()
+        return Mono.just("$path/$name/$name-$version.jar")
+    }
 
     fun save(name: String, version: String, filePart: FilePart): Mono<String> {
         val folder = File("$path/$name")

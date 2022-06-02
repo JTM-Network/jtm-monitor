@@ -18,7 +18,6 @@ class EnablePluginHandler @Autowired constructor(private val pluginService: Plug
 
     override fun onEvent(session: WebSocketSession, event: Event): Mono<WebSocketMessage> {
         val dto = gson.fromJson(event.value, PluginStatusDTO::class.java)
-        return pluginService.enablePlugin(dto.id, dto.name)
-                .flatMap { Mono.empty() }
+        return pluginService.enablePlugin(dto.id, dto.name).flatMap { Mono.empty() }
     }
 }

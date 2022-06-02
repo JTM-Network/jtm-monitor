@@ -19,6 +19,7 @@ import org.mockito.kotlin.verify
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.reactive.socket.WebSocketMessage
 import org.springframework.web.reactive.socket.WebSocketSession
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.test.StepVerifier
 import java.util.*
@@ -32,10 +33,12 @@ class ConnectedHandlerTest {
     private val connectedHandler = ConnectedHandler(serverService, sessionService, discordService)
 
     private val socket: WebSocketSession = mock()
-    private val event = Event("connected_event", GsonBuilder().create().toJson(ServerInfo(UUID.randomUUID().toString(), "test", "0.1", "1.18", "1.18", 20, 25565, 14)))
+    private val event = Event("connected_event", GsonBuilder().create().toJson(ServerInfo(UUID.randomUUID().toString(), "test", "0.1", "1.18", "1.18", 20, 25565, 14, System.currentTimeMillis())))
     private val session = Session("id", socket)
     private val server = Server(index = 1)
     private val message: WebSocketMessage = mock()
+    private val listFlux: Flux<Server> = mock()
+    private val list = listOf(server)
 
     @Before
     fun setup() {
@@ -44,14 +47,17 @@ class ConnectedHandlerTest {
     }
 
     @Test
-    fun onEvent() {
+    fun onEvent_shouldComplete() {
+        `when`(serverService.findAll()).thenReturn(listFlux)
+        `when`(listFlux.collectList()).thenReturn(Mono.just(list))
         `when`(sessionService.insert(anyOrNull())).thenReturn(Mono.just(session))
         `when`(serverService.findById(anyOrNull())).thenReturn(Mono.just(server))
+        `when`(serverService.insert(anyOrNull())).thenReturn(Mono.just(server))
         `when`(socket.textMessage(anyString())).thenReturn(message)
 
         val message = connectedHandler.onEvent(socket, event)
 
-        verify(sessionService, times(1)).insert(anyOrNull())
+        verify(serverService, times(1)).findAll()
         verifyNoMoreInteractions(sessionService)
 
         StepVerifier.create(message)

@@ -1,6 +1,7 @@
 package com.jtmnetwork.monitor.service.data.service.plugin
 
 import com.jtmnetwork.monitor.service.core.domain.entity.Server
+import com.jtmnetwork.monitor.service.core.domain.exception.ServerNotFound
 import com.jtmnetwork.monitor.service.core.domain.model.Plugin
 import com.jtmnetwork.monitor.service.core.usecase.server.ServerRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,9 +19,12 @@ class PluginService @Autowired constructor(private val serverRepository: ServerR
      * @param plugins               the plugins to update with.
      * @return                      the server they updated.
      * @see                         Server
+     *
+     * @throws ServerNotFound       if the server id can't be found.
      */
     fun updatePlugins(id: UUID, plugins: Map<String, Plugin>): Mono<Server> {
         return serverRepository.findById(id)
+                .switchIfEmpty(Mono.defer { Mono.error(ServerNotFound()) })
                 .flatMap { serverRepository.save(it.updatePlugins(plugins)) }
     }
 
@@ -34,6 +38,7 @@ class PluginService @Autowired constructor(private val serverRepository: ServerR
      */
     fun enablePlugin(id: UUID, name: String): Mono<Server> {
         return serverRepository.findById(id)
+                .switchIfEmpty(Mono.defer { Mono.error(ServerNotFound()) })
                 .flatMap { serverRepository.save(it.enable(name)) }
     }
 
@@ -47,6 +52,7 @@ class PluginService @Autowired constructor(private val serverRepository: ServerR
      */
     fun disablePlugin(id: UUID, name: String): Mono<Server> {
         return serverRepository.findById(id)
+                .switchIfEmpty(Mono.defer { Mono.error(ServerNotFound()) })
                 .flatMap { serverRepository.save(it.disable(name)) }
     }
 }

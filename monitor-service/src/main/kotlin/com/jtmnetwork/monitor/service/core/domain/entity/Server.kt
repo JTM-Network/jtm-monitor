@@ -19,6 +19,14 @@ data class Server(@Id val id: UUID = UUID.randomUUID(), val index: Int, var plug
         return this
     }
 
+    fun getPlugin(name: String): Plugin? {
+        return this.plugins[name]
+    }
+
+    fun hasPlugin(name: String): Boolean {
+        return this.plugins.containsKey(name)
+    }
+
     fun enable(name: String): Server {
         val plugin = plugins[name] ?: return this
         plugin.enabled()
