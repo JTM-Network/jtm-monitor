@@ -1,8 +1,8 @@
 package com.jtmnetwork.monitor.core.domain.entity
 
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
+import jakarta.persistence.*
 import org.bukkit.Server
-import javax.persistence.*
 
 @Entity
 @Table(name = "servers")

@@ -4,6 +4,7 @@ import com.google.inject.Injector
 import com.jtm.framework.Framework
 import com.jtm.framework.core.util.Logging
 import com.jtmnetwork.monitor.core.domain.constants.ServerType
+import com.jtmnetwork.monitor.core.domain.entity.ServerInfo
 import com.jtmnetwork.monitor.data.repository.EventRepository
 import com.jtmnetwork.monitor.entrypoint.event.EventRegistry
 import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
@@ -20,6 +21,8 @@ class JTMMonitor {
             injector = framework.injector(listOf(MonitorModule(), EventModule()))
             registry = EventRegistry(getEventRepository(), injector)
             type = ServerType.SPIGOT
+
+            framework.registerClass(ServerInfo::class.java)
         }
 
         fun bungeeSetup() {
@@ -32,7 +35,6 @@ class JTMMonitor {
 
         fun init() {
             registry.init()
-
         }
 
         fun enable() {

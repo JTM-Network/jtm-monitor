@@ -50,7 +50,7 @@ dependencies {
     implementation "com.jtm.framework:framework:0.9.54-dev"
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2'
-    implementation "com.jtmnetwork.monitor:monitor-main:0.71"
+    implementation "com.jtmnetwork.monitor:monitor-main:0.72"
 
     compileClasspath 'me.clip:placeholderapi:2.10.9'
 
@@ -62,6 +62,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.22.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
 }
 
 sourceCompatibility = 16
