@@ -1,5 +1,7 @@
 package com.jtmnetwork.monitor.service.data.service.plugin
 
+import com.jtmnetwork.monitor.service.core.domain.dto.PluginRequestDTO
+import com.jtmnetwork.monitor.service.core.domain.dto.PluginStatusDTO
 import com.jtmnetwork.monitor.service.core.domain.exception.SessionNotFound
 import com.jtmnetwork.monitor.service.core.domain.model.CommandDTO
 import com.jtmnetwork.monitor.service.data.repository.SessionRepository
@@ -19,5 +21,15 @@ class CommandService @Autowired constructor(private val sessionRepository: Sessi
     fun sendCommand(dto: CommandDTO): Mono<Void> {
         val session = sessionRepository.getSession(dto.id) ?: return Mono.error { SessionNotFound() }
         return session.sendEvent("command_event", dto.command)
+    }
+
+    fun sendEnablePlugin(dto: PluginRequestDTO): Mono<Void> {
+        val session = sessionRepository.getSession(dto.id) ?: return Mono.error { SessionNotFound() }
+        return session.sendEvent("enable_plugin_event", dto.plugin)
+    }
+
+    fun sendDisablePlugin(dto: PluginRequestDTO): Mono<Void> {
+        val session = sessionRepository.getSession(dto.id) ?: return Mono.error { SessionNotFound() }
+        return session.sendEvent("disable_plugin_event", dto.plugin)
     }
 }
