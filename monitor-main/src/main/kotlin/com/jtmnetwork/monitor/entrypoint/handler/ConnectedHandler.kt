@@ -40,7 +40,7 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
     }
 
     fun fetchPlugins(): Map<String, Plugin> {
-        val list = connection.framework.server.pluginManager.plugins.toList().stream()
+        val list: List<Plugin> = connection.framework.server.pluginManager.plugins.toList().stream()
             .map { pl -> Plugin(pl.name, pl.description.version, pl.isEnabled) }.toList()
         return list.associateBy { it.name }
     }
