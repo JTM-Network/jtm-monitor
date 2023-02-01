@@ -27,15 +27,22 @@ gradle.properties
 
 monitor-main/.gradle
 monitor-main/build
+monitor-main/bin
 
 monitor-spigot/.gradle
 monitor-spigot/build
+monitor-spigot/bin
 
 monitor-bungee/.gradle
 monitor-bungee/build
+monitor-bungee/bin
 
 monitor-velocity/.gradle
 monitor-velocity/build
+monitor-velocity/bin
 
 monitor-service/.gradle
 monitor-service/build
+monitor-service/bin
+
+act
