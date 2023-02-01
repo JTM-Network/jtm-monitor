@@ -15,7 +15,7 @@ class ResourceSearchOperationTest {
     private val executor = OperationExecutor(observer = observer, operation = searchOperation)
 
     @Test
-    fun execute() {
+    fun execute_shouldSearch() {
         searchOperation.execute(executor)
 
         verify(observer, times(1)).sendMessage(anyOrNull(), anyOrNull())
