@@ -12,6 +12,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.*
+import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class EventDispatcherTest {
@@ -25,7 +26,7 @@ class EventDispatcherTest {
 
     @Test
     fun dispatch_shouldSucceed() {
-        `when`(repository.getHandler(anyString())).thenReturn(handler)
+        `when`(repository.getHandler(anyString())).thenReturn(Optional.of(handler))
 
         dispatcher.dispatch(socket, GsonBuilder().create().toJson(event))
 

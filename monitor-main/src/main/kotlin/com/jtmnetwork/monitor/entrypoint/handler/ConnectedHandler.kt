@@ -32,15 +32,16 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
         logger.info("Successfully connected to the server.")
 //        val logs = logReporter.getLogs()
 //        sendEvent(socket,"incoming_log_event", ServerLog(logs))
-        sendPlugins(socket)
+        val plugins: Map<String, Plugin> = fetchPlugins()
+        sendEvent(socket,"update_plugins_event", PluginDTO(UUID.fromString(configuration.getServerId()), plugins))
+        logger.info("Sent plugin update.")
 
 //        logReporter.init()
     }
 
-    private fun sendPlugins(socket: WebSocket) {
-        val list = connection.framework.server.pluginManager.plugins.toList().stream().map { pl -> Plugin(pl.name, pl.description.version, pl.isEnabled) }.toList()
-        val map = list.associateBy { it.name }
-        sendEvent(socket,"update_plugins_event", PluginDTO(UUID.fromString(configuration.getServerId()), map))
-        logger.info("Sent plugin update.")
+    fun fetchPlugins(): Map<String, Plugin> {
+        val list = connection.framework.server.pluginManager.plugins.toList().stream()
+            .map { pl -> Plugin(pl.name, pl.description.version, pl.isEnabled) }.toList()
+        return list.associateBy { it.name }
     }
 }

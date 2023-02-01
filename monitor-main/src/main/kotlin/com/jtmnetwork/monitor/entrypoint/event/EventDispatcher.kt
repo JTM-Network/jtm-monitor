@@ -12,13 +12,12 @@ import org.slf4j.LoggerFactory
 @Singleton
 class EventDispatcher @Inject constructor(private val repository: EventRepository) {
 
-    private val logger = LoggerFactory.getLogger(EventDispatcher::class.java)
     private val gson = GsonBuilder().setPrettyPrinting().create()
 
     fun dispatch(socket: WebSocket, msg: String) {
         val event = gson.fromJson(msg, Event::class.java)
-        val handler = repository.getHandler(event.name) ?: return
-        handler.onEvent(socket, event)
+        val handler = repository.getHandler(event.name)
+        handler.ifPresent { h -> h.onEvent(socket, event) }
     }
 
     fun sendEvent(socket: WebSocket, name: String, value: Any) {
