@@ -18,7 +18,18 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: Restore gradle.properties
+      env:
+        GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
+      shell: bash
+      run: |
+        cd monitor-main
+        echo "${GRADLE_PROPERTIES}" > gradle.properties
     - name: Build with gradle
       run: |-
         cd monitor-spigot
         ./gradlew build
+    - name: Publish with gradle
+      run: |-
+        cd monitor-main
+        ./gradlew publish
