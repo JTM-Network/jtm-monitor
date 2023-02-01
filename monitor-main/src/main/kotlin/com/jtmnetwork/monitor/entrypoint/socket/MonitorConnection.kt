@@ -13,7 +13,7 @@ import okhttp3.WebSocket
 import org.slf4j.LoggerFactory
 
 @Singleton
-class MonitorConnection @Inject constructor(private val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
+class MonitorConnection @Inject constructor(val framework: Framework, private val configuration: ServerConfiguration, private val dispatcher: EventDispatcher) {
 
     private val logger = LoggerFactory.getLogger(MonitorConnection::class.java)
     private val gson = GsonBuilder().setPrettyPrinting().create()

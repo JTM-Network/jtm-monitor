@@ -8,7 +8,7 @@ import okhttp3.WebSocket
 import org.bukkit.Bukkit
 import org.slf4j.LoggerFactory
 
-class CommandHandler @Inject constructor(private val framework: Framework): EventHandlerImpl() {
+class CommandHandler @Inject constructor(private val framework: Framework): EventHandlerImpl("command_event") {
 
     private val logger = LoggerFactory.getLogger(CommandHandler::class.java)
 
