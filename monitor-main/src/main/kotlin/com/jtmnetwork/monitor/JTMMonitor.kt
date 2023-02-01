@@ -1,8 +1,9 @@
 package com.jtmnetwork.monitor
 
-import com.google.inject.Guice
 import com.google.inject.Injector
 import com.jtm.framework.Framework
+import com.jtm.framework.core.util.Logging
+import com.jtmnetwork.monitor.core.domain.constants.ServerType
 import com.jtmnetwork.monitor.data.repository.EventRepository
 import com.jtmnetwork.monitor.entrypoint.event.EventRegistry
 import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
@@ -13,10 +14,20 @@ class JTMMonitor {
     companion object {
         private lateinit var injector: Injector
         private lateinit var registry: EventRegistry
+        private lateinit var type: ServerType
 
-        fun setup(framework: Framework) {
-            injector = framework.injector(listOf(MonitorModule(framework), EventModule()))
+        fun spigotSetup(framework: Framework) {
+            injector = framework.injector(listOf(MonitorModule(), EventModule()))
             registry = EventRegistry(getEventRepository(), injector)
+            type = ServerType.SPIGOT
+        }
+
+        fun bungeeSetup() {
+            type = ServerType.BUNGEE
+        }
+
+        fun velocitySetup() {
+            type = ServerType.VELOCITY
         }
 
         fun init() {
@@ -38,6 +49,10 @@ class JTMMonitor {
 
         private fun getEventRepository(): EventRepository {
             return injector.getInstance(EventRepository::class.java)
+        }
+
+        private fun getLogging(): Logging {
+            return injector.getInstance(Logging::class.java)
         }
     }
 }

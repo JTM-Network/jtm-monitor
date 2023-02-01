@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
 
 /**
- * Store Event handlers here.
+ * Store Event handlers in memory.
  */
 @Component
 class EventRepository @Autowired constructor(private val context: ApplicationContext) {
@@ -36,9 +36,5 @@ class EventRepository @Autowired constructor(private val context: ApplicationCon
 
     fun getHandler(name: String): EventHandler? {
         return map[name]
-    }
-
-    fun removeHandler(name: String): EventHandler? {
-        return map.remove(name)
     }
 }
