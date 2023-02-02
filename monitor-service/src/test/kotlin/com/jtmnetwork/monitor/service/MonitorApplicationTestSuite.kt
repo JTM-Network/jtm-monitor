@@ -10,7 +10,7 @@ import com.jtmnetwork.monitor.service.entrypoint.controller.CommandControllerTes
 import com.jtmnetwork.monitor.service.entrypoint.controller.StoredStoredPluginControllerTest
 import com.jtmnetwork.monitor.service.entrypoint.controller.ServerControllerTest
 import com.jtmnetwork.monitor.service.entrypoint.controller.SessionControllerTest
-import com.jtmnetwork.monitor.service.entrypoint.handler.ConnectedHandlerTest
+import com.jtmnetwork.monitor.service.entrypoint.handler.SpigotConnectedHandlerTest
 import com.jtmnetwork.monitor.service.entrypoint.handler.log.IncomingLogHandlerTest
 import com.jtmnetwork.monitor.service.entrypoint.handler.plugin.DisablePluginHandlerTest
 import com.jtmnetwork.monitor.service.entrypoint.handler.plugin.EnablePluginHandlerTest
@@ -34,7 +34,7 @@ import org.junit.runners.Suite
     CommandControllerTest::class,
 
     IncomingLogHandlerTest::class,
-    ConnectedHandlerTest::class,
+    SpigotConnectedHandlerTest::class,
     UpdatePluginHandlerTest::class,
     EnablePluginHandlerTest::class,
     DisablePluginHandlerTest::class,

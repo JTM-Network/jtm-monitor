@@ -29,7 +29,7 @@ class ResourceInstallOperationTest {
     private val client: OkHttpClient = mock()
     private val installRequest = SpigotInstallRequest("server", "test", "1.0", UUID.randomUUID().toString())
 
-    private val installOperation = ResourceInstallOperation(sessionService, pluginService, installRequest, client)
+    private val installOperation = ResourceInstallOperation(sessionService, pluginService, installRequest)
     private val observer: OperationObserver = mock()
     private val executor = OperationExecutor(observer = observer, operation = installOperation)
 

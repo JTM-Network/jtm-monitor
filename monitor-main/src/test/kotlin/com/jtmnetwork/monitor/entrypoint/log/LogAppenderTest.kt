@@ -1,6 +1,6 @@
 package com.jtmnetwork.monitor.entrypoint.log
 
-import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
+import com.jtmnetwork.monitor.entrypoint.socket.SpigotMonitorConnection
 import org.apache.logging.log4j.core.LogEvent
 import org.apache.logging.log4j.message.Message
 import org.junit.Test
@@ -15,7 +15,7 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 @RunWith(MockitoJUnitRunner::class)
 class LogAppenderTest {
 
-    private val connection: MonitorConnection = mock()
+    private val connection: SpigotMonitorConnection = mock()
     private val appender = LogAppender(connection)
 
     @Test

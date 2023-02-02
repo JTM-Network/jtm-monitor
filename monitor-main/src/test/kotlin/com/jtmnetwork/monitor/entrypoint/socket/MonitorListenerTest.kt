@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.entrypoint.socket
 
 import com.jtm.framework.Framework
-import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
+import com.jtmnetwork.monitor.entrypoint.configuration.SpigotServerConfiguration
 import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.Response
 import okhttp3.WebSocket
@@ -17,9 +17,9 @@ class MonitorListenerTest {
 
     private val framework: Framework = mock()
     private val server: Server = mock()
-    private val configuration: ServerConfiguration = mock()
+    private val configuration: SpigotServerConfiguration = mock()
     private val dispatcher: EventDispatcher = mock()
-    private lateinit var monitorListener: MonitorListener
+    private lateinit var monitorListener: SpigotMonitorListener
 
     private val socket: WebSocket = mock()
     private val res: Response = mock()
@@ -29,7 +29,7 @@ class MonitorListenerTest {
         `when`(framework.server).thenReturn(server)
         `when`(configuration.getServerId()).thenReturn(UUID.randomUUID().toString())
 
-        monitorListener = MonitorListener(framework, configuration, dispatcher)
+        monitorListener = SpigotMonitorListener(framework, configuration, dispatcher)
     }
 
     @Test

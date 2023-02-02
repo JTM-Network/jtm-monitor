@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.core.util
 
 import com.jtm.framework.Framework
-import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
+import com.jtmnetwork.monitor.entrypoint.socket.SpigotMonitorConnection
 import org.bukkit.Server
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.PluginDescriptionFile
@@ -11,8 +11,8 @@ import org.mockito.kotlin.mock
 
 class TestUtil {
     companion object {
-        fun createConnection(framework: Framework): MonitorConnection {
-            val connection: MonitorConnection = mock()
+        fun createConnection(framework: Framework): SpigotMonitorConnection {
+            val connection: SpigotMonitorConnection = mock()
 
             `when`(connection.framework).thenReturn(framework)
 

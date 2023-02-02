@@ -25,12 +25,12 @@ import reactor.test.StepVerifier
 import java.util.*
 
 @RunWith(SpringRunner::class)
-class ConnectedHandlerTest {
+class SpigotConnectedHandlerTest {
 
     private val serverService: ServerService = mock()
     private val sessionService: SessionService = mock()
     private val discordService: DiscordService = mock()
-    private val connectedHandler = ConnectedHandler(serverService, sessionService, discordService)
+    private val spigotConnectedHandler = SpigotConnectedHandler(serverService, sessionService, discordService)
 
     private val socket: WebSocketSession = mock()
     private val event = Event("connected_event", GsonBuilder().create().toJson(ServerInfo(UUID.randomUUID().toString(), "test", "0.1", "1.18", "1.18", 20, 25565, 14, System.currentTimeMillis())))
@@ -55,7 +55,7 @@ class ConnectedHandlerTest {
         `when`(serverService.insert(anyOrNull())).thenReturn(Mono.just(server))
         `when`(socket.textMessage(anyString())).thenReturn(message)
 
-        val message = connectedHandler.onEvent(socket, event)
+        val message = spigotConnectedHandler.onEvent(socket, event)
 
         verify(serverService, times(1)).findAll()
         verifyNoMoreInteractions(sessionService)

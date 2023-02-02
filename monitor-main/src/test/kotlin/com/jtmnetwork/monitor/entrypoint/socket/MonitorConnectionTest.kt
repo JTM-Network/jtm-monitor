@@ -1,7 +1,7 @@
 package com.jtmnetwork.monitor.entrypoint.socket
 
 import com.jtm.framework.Framework
-import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
+import com.jtmnetwork.monitor.entrypoint.configuration.SpigotServerConfiguration
 import com.jtmnetwork.monitor.entrypoint.event.EventDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.WebSocket
@@ -21,16 +21,16 @@ class MonitorConnectionTest {
 
     private val framework: Framework = mock()
     private val server: Server = mock()
-    private val configuration: ServerConfiguration = mock()
+    private val configuration: SpigotServerConfiguration = mock()
     private val dispatcher: EventDispatcher = mock()
-    private val connection = MonitorConnection(framework, configuration, dispatcher)
+    private val connection = SpigotMonitorConnection(framework, configuration, dispatcher)
 
     private val client: OkHttpClient = mock()
     private val socket: WebSocket = mock()
 
     @Before
     fun setup() {
-        connection.client = client
+        connection.setClient(client)
 
         `when`(framework.server).thenReturn(server)
     }
@@ -47,7 +47,7 @@ class MonitorConnectionTest {
 
     @Test
     fun disconnect() {
-        connection.socket = socket
+        connection.setSocket(socket)
 
         connection.disconnect()
 
@@ -57,7 +57,7 @@ class MonitorConnectionTest {
 
     @Test
     fun sendEvent() {
-        connection.socket = socket
+        connection.setSocket(socket)
 
         connection.sendEvent("connected_event", "test")
 
