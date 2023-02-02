@@ -18,9 +18,9 @@ class CommandService @Autowired constructor(private val sessionRepository: Sessi
      * @param dto                   the data transfer object.
      * @return                      an empty {@link Mono} if successful.
      */
-    fun sendCommand(dto: CommandDTO): Mono<Void> {
+    fun sendSpigotCommand(dto: CommandDTO): Mono<Void> {
         val session = sessionRepository.getSession(dto.id) ?: return Mono.error { SessionNotFound() }
-        return session.sendEvent("command_event", dto.command)
+        return session.sendEvent("spigot_command_event", dto.command)
     }
 
     fun sendEnablePlugin(dto: PluginRequestDTO): Mono<Void> {

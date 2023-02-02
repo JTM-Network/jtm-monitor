@@ -13,8 +13,8 @@ import reactor.core.publisher.Mono
 @RequestMapping("/command")
 class CommandController @Autowired constructor(private val commandService: CommandService) {
 
-    @PostMapping
-    fun sendCommand(@RequestBody dto: CommandDTO): Mono<Void> {
-        return commandService.sendCommand(dto)
+    @PostMapping("/spigot")
+    fun sendSpigotCommand(@RequestBody dto: CommandDTO): Mono<Void> {
+        return commandService.sendSpigotCommand(dto)
     }
 }
