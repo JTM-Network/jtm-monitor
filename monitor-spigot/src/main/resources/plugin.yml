@@ -1,5 +1,5 @@
 name: JTMMonitor
 author: JTM Network
-main: com.jtmnetwork.monitor.paper.PaperMonitor
+main: com.jtmnetwork.monitor.spigot.SpigotMonitor
 version: 0.01
 api-version: 1.13

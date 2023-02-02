@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2'
     implementation "com.jtmnetwork.monitor:monitor-main:0.72"
 
-    compileClasspath 'me.clip:placeholderapi:2.10.9'
+    compileOnly 'me.clip:placeholderapi:2.10.9'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor "org.projectlombok:lombok:1.18.24"
@@ -88,5 +88,5 @@ test {
 }
 
 shadowJar {
-    destinationDirectory = file("/mnt/65f8f8c0-a736-45bf-a047-782b19fc195b/Programming/Servers/lobby/plugins")
+    destinationDirectory = file("/mnt/65f8f8c0-a736-45bf-a047-782b19fc195b/Programming/Servers/dev/plugins")
 }

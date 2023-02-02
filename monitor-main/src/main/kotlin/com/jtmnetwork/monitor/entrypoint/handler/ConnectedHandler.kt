@@ -5,6 +5,7 @@ import com.jtmnetwork.monitor.core.domain.dto.PluginDTO
 import com.jtmnetwork.monitor.core.domain.entity.ServerInfo
 import com.jtmnetwork.monitor.core.domain.model.Event
 import com.jtmnetwork.monitor.core.domain.model.Plugin
+import com.jtmnetwork.monitor.core.domain.model.ServerLog
 import com.jtmnetwork.monitor.core.usecase.handler.EventHandlerImpl
 import com.jtmnetwork.monitor.core.usecase.log.LogReporter
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
@@ -30,13 +31,12 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
         val info = getGson().fromJson(event.value, ServerInfo::class.java)
         configuration.setServerId(info.id)
         logger.info("Successfully connected to the server.")
-//        val logs = logReporter.getLogs()
-//        sendEvent(socket,"incoming_log_event", ServerLog(logs))
+        val logs = logReporter.getLogs()
+        sendEvent(socket,"incoming_log_event", ServerLog(logs))
         val plugins: Map<String, Plugin> = fetchPlugins()
         sendEvent(socket,"update_plugins_event", PluginDTO(UUID.fromString(configuration.getServerId()), plugins))
         logger.info("Sent plugin update.")
-
-//        logReporter.init()
+        logReporter.init()
     }
 
     fun fetchPlugins(): Map<String, Plugin> {

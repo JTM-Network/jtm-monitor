@@ -1,15 +1,12 @@
-package com.jtmnetwork.monitor.paper
+package com.jtmnetwork.monitor.spigot
 
 import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.JTMMonitor
-import org.apache.logging.log4j.LogManager
 
-class PaperMonitor: Framework(false) {
-
-    private val logger = LogManager.getRootLogger()
+class SpigotMonitor: Framework(false) {
 
     override fun setup() {
-        JTMMonitor.setup(this)
+        JTMMonitor.spigotSetup(this)
     }
 
     override fun init() {
