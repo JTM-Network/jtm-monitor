@@ -28,7 +28,7 @@ class CommandControllerTest {
 
     @Test
     fun sendCommand() {
-        `when`(commandService.sendCommand(anyOrNull())).thenReturn(Mono.empty())
+        `when`(commandService.sendSpigotCommand(anyOrNull())).thenReturn(Mono.empty())
 
         testClient.post()
             .uri("/command")
@@ -36,7 +36,7 @@ class CommandControllerTest {
             .exchange()
             .expectStatus().isOk
 
-        verify(commandService, times(1)).sendCommand(anyOrNull())
+        verify(commandService, times(1)).sendSpigotCommand(anyOrNull())
         verifyNoMoreInteractions(commandService)
     }
 }

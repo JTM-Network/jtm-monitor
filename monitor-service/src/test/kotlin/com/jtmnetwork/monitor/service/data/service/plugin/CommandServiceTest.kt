@@ -31,7 +31,7 @@ class CommandServiceTest {
         `when`(sessionRepository.getSession(anyString())).thenReturn(session)
         `when`(session.sendEvent(anyString(), anyOrNull())).thenReturn(Mono.empty())
 
-        val returned = commandService.sendCommand(dto)
+        val returned = commandService.sendSpigotCommand(dto)
 
         verify(sessionRepository, times(1)).getSession(anyString())
         verifyNoMoreInteractions(sessionRepository)
@@ -47,7 +47,7 @@ class CommandServiceTest {
     fun sendCommand_shouldThrowNotFound() {
         `when`(sessionRepository.getSession(anyString())).thenReturn(null)
 
-        val returned = commandService.sendCommand(dto)
+        val returned = commandService.sendSpigotCommand(dto)
 
         verify(sessionRepository, times(1)).getSession(anyString())
         verifyNoMoreInteractions(sessionRepository)
