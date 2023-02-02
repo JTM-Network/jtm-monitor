@@ -74,5 +74,5 @@ dockerRun {
     image 'drennydev/monitor-service'
     ports '8787:8787'
     daemonize true
-    env 'PROFILE': 'kubernetes', 'API_KEY': 'NzM2OTYwODE2OTc2MzYzNTUw.Gj-RKy.gqco6Vsfe6Xed8IFt6dbFVGyA0BazttjVZfPVY', 'MONGO_USERNAME': 'joety', 'MONGO_PASSWORD': 'secret', 'MONGO_HOST': 'local.jtm-network.com', 'MONGO_PORT': '27017', 'MONGO_DATABASE': 'jtm', 'REDIS_HOST': 'local.jtm-network.com', 'REDIS_PORT': '6379'
+
 }
