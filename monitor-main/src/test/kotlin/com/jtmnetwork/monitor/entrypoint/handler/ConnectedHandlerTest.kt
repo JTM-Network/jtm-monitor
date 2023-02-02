@@ -40,16 +40,16 @@ class ConnectedHandlerTest {
         verify(configuration, times(1)).getServerId()
         verifyNoMoreInteractions(configuration)
 
-//        verify(reporter, times(1)).getLogs()
-//        verify(reporter, times(1)).init()
-//        verifyNoMoreInteractions(reporter)
+        verify(reporter, times(1)).getLogs()
+        verify(reporter, times(1)).init()
+        verifyNoMoreInteractions(reporter)
 
         verify(connection, times(1)).framework
         verifyNoMoreInteractions(connection)
 
         verify(connectedHandler, times(1)).getGson()
         verify(connectedHandler, times(1)).onEvent(anyOrNull(), anyOrNull())
-        verify(connectedHandler, times(1)).sendEvent(anyOrNull(),  anyString(), anyOrNull())
+        verify(connectedHandler, times(2)).sendEvent(anyOrNull(),  anyString(), anyOrNull())
         verify(connectedHandler, times(1)).fetchPlugins()
         verifyNoMoreInteractions(connectedHandler)
     }
