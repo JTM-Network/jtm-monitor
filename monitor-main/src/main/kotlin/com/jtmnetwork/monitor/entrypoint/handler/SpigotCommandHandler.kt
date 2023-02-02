@@ -5,12 +5,11 @@ import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.core.domain.model.Event
 import com.jtmnetwork.monitor.core.usecase.handler.EventHandlerImpl
 import okhttp3.WebSocket
-import org.bukkit.Bukkit
 import org.slf4j.LoggerFactory
 
-class CommandHandler @Inject constructor(private val framework: Framework): EventHandlerImpl("command_event") {
+class SpigotCommandHandler @Inject constructor(private val framework: Framework): EventHandlerImpl("spigot_command_event") {
 
-    private val logger = LoggerFactory.getLogger(CommandHandler::class.java)
+    private val logger = LoggerFactory.getLogger(SpigotCommandHandler::class.java)
 
     override fun onEvent(socket: WebSocket, event: Event) {
         logger.info("Processing command: ${event.value}")

@@ -5,9 +5,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.jtmnetwork.monitor.core.domain.model.Event
 import com.jtmnetwork.monitor.data.repository.EventRepository
-import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
 import okhttp3.WebSocket
-import org.slf4j.LoggerFactory
 
 @Singleton
 class EventDispatcher @Inject constructor(private val repository: EventRepository) {

@@ -17,9 +17,9 @@ import reactor.core.publisher.Mono
 import java.util.*
 
 @Component
-class ConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService, private val discordService: DiscordService): EventHandlerImpl("connected_event") {
+class SpigotConnectedHandler @Autowired constructor(private val serverService: ServerService, private val sessionService: SessionService, private val discordService: DiscordService): EventHandlerImpl("spigot_connected_event") {
 
-    private val logger = LoggerFactory.getLogger(ConnectedHandler::class.java)
+    private val logger = LoggerFactory.getLogger(SpigotConnectedHandler::class.java)
     private val gson = GsonBuilder().create()
 
     /**

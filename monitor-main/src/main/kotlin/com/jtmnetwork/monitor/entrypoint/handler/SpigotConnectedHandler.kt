@@ -2,24 +2,24 @@ package com.jtmnetwork.monitor.entrypoint.handler
 
 import com.google.inject.Inject
 import com.jtmnetwork.monitor.core.domain.dto.PluginDTO
-import com.jtmnetwork.monitor.core.domain.entity.ServerInfo
+import com.jtmnetwork.monitor.core.domain.model.serverinfo.SpigotServerInfo
 import com.jtmnetwork.monitor.core.domain.model.Event
 import com.jtmnetwork.monitor.core.domain.model.Plugin
 import com.jtmnetwork.monitor.core.domain.model.ServerLog
 import com.jtmnetwork.monitor.core.usecase.handler.EventHandlerImpl
 import com.jtmnetwork.monitor.core.usecase.log.LogReporter
 import com.jtmnetwork.monitor.entrypoint.configuration.ServerConfiguration
-import com.jtmnetwork.monitor.entrypoint.socket.MonitorConnection
+import com.jtmnetwork.monitor.entrypoint.socket.SpigotMonitorConnection
 import okhttp3.WebSocket
 import org.slf4j.LoggerFactory
 import java.util.*
 
 /**
- * Handles the initial handshake between server and client.
+ * Handles the initial handshake between server and spigot client.
  */
-class ConnectedHandler @Inject constructor(private val connection: MonitorConnection, private val logReporter: LogReporter, private val configuration: ServerConfiguration): EventHandlerImpl("connected_event") {
+class SpigotConnectedHandler @Inject constructor(private val connection: SpigotMonitorConnection, private val logReporter: LogReporter, private val configuration: ServerConfiguration): EventHandlerImpl("spigot_connected_event") {
 
-    private val logger = LoggerFactory.getLogger(ConnectedHandler::class.java)
+    private val logger = LoggerFactory.getLogger(SpigotConnectedHandler::class.java)
 
     /**
      * Using the server id sent by the server, persist it in the server configuration
@@ -28,7 +28,7 @@ class ConnectedHandler @Inject constructor(private val connection: MonitorConnec
      * @param event             the event being sent.
      */
     override fun onEvent(socket: WebSocket, event: Event) {
-        val info = getGson().fromJson(event.value, ServerInfo::class.java)
+        val info = getGson().fromJson(event.value, SpigotServerInfo::class.java)
         configuration.setServerId(info.id)
         logger.info("Successfully connected to the server.")
         val logs = logReporter.getLogs()
