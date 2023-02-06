@@ -50,7 +50,7 @@ dependencies {
     implementation "com.jtm.framework:framework:0.9.54-dev"
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.2'
-    implementation "com.jtmnetwork.monitor:monitor-main:0.75"
+    implementation "com.jtmnetwork.monitor:monitor-main:0.74"
 
     compileOnly 'me.clip:placeholderapi:2.10.9'
 
