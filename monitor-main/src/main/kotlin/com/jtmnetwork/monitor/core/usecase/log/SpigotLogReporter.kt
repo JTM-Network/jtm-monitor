@@ -3,7 +3,6 @@ package com.jtmnetwork.monitor.core.usecase.log
 import com.google.inject.Inject
 import com.jtm.framework.Framework
 import com.jtmnetwork.monitor.entrypoint.log.LogAppender
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.Logger
 import java.io.File
 import java.util.*
@@ -13,7 +12,7 @@ class SpigotLogReporter @Inject constructor(val framework: Framework, private va
     private val file = File("${framework.server.worldContainer.path}/logs/latest.log")
 
     override fun init() {
-        val logger = LogManager.getRootLogger() as Logger
+        val logger = framework.log4JLogger as Logger
         logger.addAppender(logAppender)
     }
 
