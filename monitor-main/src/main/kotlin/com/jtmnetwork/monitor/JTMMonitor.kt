@@ -19,17 +19,28 @@ class JTMMonitor {
         private lateinit var registry: EventRegistry
         private lateinit var type: ServerType
 
+        /**
+         * This is to be called onEnable of bukkit/spigot based plugins.
+         *
+         * @param framework     the class to be extended by the spigot/bukkit plugin
+         */
         fun spigotSetup(framework: Framework) {
             type = ServerType.SPIGOT
             injector = framework.injector(listOf(MonitorModule(type), EventModule(type)))
             registry = EventRegistry(getEventRepository(), injector, type)
         }
 
+        /**
+         * This is to be called onEnable of bungee plugin.
+         */
         fun bungeeSetup() {
             type = ServerType.BUNGEE
             injector = Guice.createInjector(MonitorModule(type), EventModule(type))
         }
 
+        /**
+         * This is to be called onEnable of velocity plugin.
+         */
         fun velocitySetup() {
             type = ServerType.VELOCITY
             injector = Guice.createInjector(MonitorModule(type), EventModule(type))

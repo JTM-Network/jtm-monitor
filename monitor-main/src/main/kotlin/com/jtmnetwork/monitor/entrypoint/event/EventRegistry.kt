@@ -9,6 +9,10 @@ import com.jtmnetwork.monitor.entrypoint.handler.UpdateResponseHandler
 
 class EventRegistry(private val repository: EventRepository, private val injector: Injector, private val type: ServerType) {
 
+    /**
+     * Initialize the necessary event handlers. Using a switch statement,
+     * to separate platform specific event handlers on initialization.
+     */
     fun init() {
         when(type) {
             ServerType.SPIGOT -> {

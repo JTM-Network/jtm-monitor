@@ -30,13 +30,12 @@ class SpigotConnectedHandler @Inject constructor(private val connection: SpigotM
     override fun onEvent(socket: WebSocket, event: Event) {
         val info = getGson().fromJson(event.value, SpigotServerInfo::class.java)
         configuration.setServerId(info.id)
-        logger.info("Successfully connected to the server.")
         val logs = logReporter.getLogs()
         sendEvent(socket,"incoming_log_event", ServerLog(logs))
         val plugins: Map<String, Plugin> = fetchPlugins()
         sendEvent(socket,"update_plugins_event", PluginDTO(UUID.fromString(configuration.getServerId()), plugins))
-        logger.info("Sent plugin update.")
         logReporter.init()
+        logger.info("Successfully connected to the server.")
     }
 
     fun fetchPlugins(): Map<String, Plugin> {
