@@ -15,6 +15,7 @@ class SpigotLogReporter @Inject constructor(val framework: Framework, private va
 
     override fun init() {
         val logger = LogManager.getRootLogger() as Logger
+        logAppender.start()
         logger.addAppender(logAppender)
     }
 
