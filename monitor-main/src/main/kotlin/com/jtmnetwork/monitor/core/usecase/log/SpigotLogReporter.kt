@@ -8,14 +8,12 @@ import org.apache.logging.log4j.core.Logger
 import java.io.File
 import java.util.*
 
-
 class SpigotLogReporter @Inject constructor(val framework: Framework, private val logAppender: LogAppender): LogReporter {
 
     private val file = File("${framework.server.worldContainer.path}/logs/latest.log")
 
     override fun init() {
         val logger = LogManager.getRootLogger() as Logger
-        logAppender.start()
         logger.addAppender(logAppender)
     }
 

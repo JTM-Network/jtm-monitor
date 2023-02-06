@@ -13,6 +13,10 @@ import java.util.*
 @Singleton
 class LogAppender @Inject constructor(private val connection: MonitorConnection): AbstractAppender("MonitorLogAppender", null, PatternLayout.newBuilder().withPattern("[%d{HH:mm:ss} %level]: %msg").build(), true, arrayOf()) {
 
+    init {
+        this.start()
+    }
+
     override fun append(event: LogEvent) {
         val list: LinkedList<String> = LinkedList()
         list.add(event.message.format)
